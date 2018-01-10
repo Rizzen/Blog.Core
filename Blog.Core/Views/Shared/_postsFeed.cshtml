@@ -1,0 +1,8 @@
+﻿@model Blog.Core.Models.DAL.IPostRepository 
+
+@foreach (var post in Model.Posts)
+{
+    <div class="blog-post-list-item">
+        @Html.Partial(post)
+    </div>
+}

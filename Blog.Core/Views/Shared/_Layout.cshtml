@@ -1,0 +1,13 @@
+﻿@inject Microsoft.Extensions.Options.IOptionsMonitor<SiteSettings> SiteSettings
+
+<html>
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/blog.css"/>
+    <link rel="stylesheet" href="/css/layout.css"/>
+</head>
+<body>
+@Html.Partial("_navBar")
+@RenderBody()
+</body>
+</html>

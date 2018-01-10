@@ -1,0 +1,39 @@
+﻿@inject Microsoft.Extensions.Options.IOptionsMonitor<SiteSettings> SiteSettings;
+@model Blog.Core.Models.DAL.IPostRepository
+@{
+    ViewData["Title"] = $"Blog {SiteSettings.CurrentValue.Author}";
+    ViewData["Description"] = SiteSettings.CurrentValue.Description;
+    ViewBag.PageId = "about";
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-lg-8 col-xl-9">
+            @Html.Partial("_postsFeed", Model)
+        </div>
+        <div class="col-xs-12 col-lg-4 col-xl-3">
+            @Html.Partial("_tagList")
+        </div>
+    </div>
+</div>
+
+<footer class="blog-footer">
+    <div class="container">
+        <p class="m-0 text-center">
+            <a title="Marcus Weaver" href="https://github.com/Rizzen">@@Rizzen</a>
+        </p>
+        <p class="m-0 text-center">
+            <span>2018 - Mark Tkachenko</span>
+        </p>
+    </div>
+</footer>
+</body>
+</html>
