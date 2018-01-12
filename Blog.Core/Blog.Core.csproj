@@ -8,6 +8,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Utils\Templating" />
     <Folder Include="Views\Home\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
