@@ -14,11 +14,12 @@ namespace Blog.Core.Controllers
         private readonly PostsProcessor _postsProcessor;
         
         public HomeController(IHostingEnvironment hostingEnvironment, 
-                              IPostRepository postRepository)
+                              IPostRepository postRepository,
+                              PostsProcessor postsProcessor)
         {
             _hostingEnvironment = hostingEnvironment;
             _postRepository = postRepository;
-            _postsProcessor = new PostsProcessor(postRepository);
+            _postsProcessor = postsProcessor; // new PostsProcessor(postRepository);
         }
 
         public ViewResult Index()

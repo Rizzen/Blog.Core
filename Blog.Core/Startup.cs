@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Blog.Core.Models.Settings;
+using Blog.Core.Models.Templating;
 
 namespace Blog.Core
 {
@@ -30,6 +31,7 @@ namespace Blog.Core
             services.AddMvc();
             services.Configure<SiteSettings>(Configuration.GetSection("SiteSettings"));
             services.AddSingleton<IPostRepository, PostRepository>();
+            services.AddTransient<PostsProcessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
