@@ -10,7 +10,7 @@ namespace Blog.Core.Models.DAL
     {
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public IQueryable<string> Posts => GetPostsFromDefaultDirectory();
+        public IQueryable<Post> Posts => GetPostsFromDefaultDirectory();
 
         public string Path => _hostingEnvironment.ContentRootPath;
         
@@ -20,12 +20,12 @@ namespace Blog.Core.Models.DAL
         }
         
         /// <summary>Returns posts from default directory</summary>
-        private IQueryable<string> GetPostsFromDefaultDirectory()
+        private IQueryable<Post> GetPostsFromDefaultDirectory()
         {
-            //TODO There will be extraction of post metadata and mapping it to Post
             return Directory.GetFiles($"{_hostingEnvironment.ContentRootPath}/Views/_posts", "*.cshtml", SearchOption.AllDirectories)
-                            .Select(p => p.Replace(_hostingEnvironment.ContentRootPath, "~"))
-                            .AsQueryable();
+                                     .Select(p => p.Replace(_hostingEnvironment.ContentRootPath, "~"))
+                                     .Select(p => new Post {View = p})
+                                     .AsQueryable();
         }
     }
 }

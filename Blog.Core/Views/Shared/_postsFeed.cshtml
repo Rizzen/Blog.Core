@@ -3,6 +3,6 @@
 @foreach (var post in Model.Posts)
 {
     <div class="blog-post-list-item">
-        @Html.Partial(post)
+        @Html.Partial(post.View)
     </div>
 }
