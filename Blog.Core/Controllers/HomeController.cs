@@ -10,16 +10,13 @@ namespace Blog.Core.Controllers
     public class HomeController : Controller
     {
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly IPostRepository _postRepository;
         private readonly PostsProcessor _postsProcessor;
         
-        public HomeController(IHostingEnvironment hostingEnvironment, 
-                              IPostRepository postRepository,
+        public HomeController(IHostingEnvironment hostingEnvironment,
                               PostsProcessor postsProcessor)
         {
             _hostingEnvironment = hostingEnvironment;
-            _postRepository = postRepository;
-            _postsProcessor = postsProcessor; // new PostsProcessor(postRepository);
+            _postsProcessor = postsProcessor;
         }
 
         public ViewResult Index()
