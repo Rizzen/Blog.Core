@@ -10,8 +10,17 @@ h6, .h6 {
     color: #333;
 }
 
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
 body {
     color: #555;
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
 }
 
 /*
@@ -163,7 +172,12 @@ div.main {padding-bottom:50px;}
  * Footer
  */
 
+
 .blog-footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
     padding: 0.5rem 0;
     color: #d6d6d6;
     text-align: center;
@@ -177,7 +191,6 @@ div.main {padding-bottom:50px;}
 /*
  * Misc
  */
-
 img.share-button {
     height: 24px;
     width: 24px;
