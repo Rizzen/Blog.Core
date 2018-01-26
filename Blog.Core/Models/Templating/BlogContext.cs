@@ -3,6 +3,7 @@ using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
 using Blog.Core.Models.DAL;
+using Blog.Core.Models.Templating.Razor;
 using Microsoft.AspNetCore.Hosting;
 using RazorLight;
 
@@ -12,18 +13,16 @@ namespace Blog.Core.Models.Templating
     {
         private readonly IPostRepository _postRepository;
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly RazorLightEngine engine;
+        private readonly RazorEngine _engine;
 
         public IEnumerable<Post> Posts => _postRepository.Posts;
         
         public BlogContext(IPostRepository postRepository,
-                              IHostingEnvironment hostingEnvironment)
+                           IHostingEnvironment hostingEnvironment)
         {
             _postRepository = postRepository;
             _hostingEnvironment = hostingEnvironment;
-            engine = new RazorLightEngineBuilder()
-                          .UseMemoryCachingProvider()
-                          .Build();
+            _engine = new RazorEngine();
         }
 
         public async Task<PageContext> GetPostFeed()
@@ -52,7 +51,7 @@ namespace Blog.Core.Models.Templating
             
             foreach (var content in contents)
             {
-                var compiledView = await engine.CompileRenderAsync(content.Key, content.Value, model);
+                var compiledView = await _engine.ProcessTemplate(content.Key, content.Value, model);
                 
                 result.Add(new Post
                 {

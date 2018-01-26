@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using RazorLight;
 
-namespace Blog.Core.Models.Templating
+namespace Blog.Core.Models.Templating.Razor
 {
     public class RazorEngine
     {
@@ -14,7 +14,7 @@ namespace Blog.Core.Models.Templating
                           .Build();
         }
 
-        public async Task<string> ProcessTemplate(string template, object model, string name)
+        public async Task<string> ProcessTemplate(string name, string template, object model)
         {
             return await _engine.CompileRenderAsync(name, template, model);
         }
