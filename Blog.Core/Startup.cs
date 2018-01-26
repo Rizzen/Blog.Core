@@ -31,10 +31,9 @@ namespace Blog.Core
             services.AddMvc();
             services.Configure<SiteSettings>(Configuration.GetSection("SiteSettings"));
             services.AddSingleton<IPostRepository, PostRepository>();
-            services.AddTransient<PostsProcessor>();
+            services.AddSingleton<BlogContext>();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseDeveloperExceptionPage();
@@ -42,24 +41,21 @@ namespace Blog.Core
             app.UseStaticFiles();
             
             app.UseMvc(routes => {
-                
                 routes.MapRoute(
-                    "Default", // Route name
-                    "{controller}/{action}", // URL with parameters
-                    new { controller = "Home", action = "Index"} // Parameter defaults
+                    "Default", 
+                    "{controller}/{action}",
+                    new { controller = "Home", action = "Index"}
                 );
                 routes.MapRoute(name: "index",
                                     template: "{controller=Home}/{action=Index}");
-                    routes.MapRoute(name: "about",
+                routes.MapRoute(name: "about",
                                     template: "{controller=About}/{action=Index}");
-                    routes.MapRoute("MyRoute", "X{controller}/X{action}/{id}");
             });
         }
         
         private string GetPathToSettingsFile(string settingsFileName)
         {
             return "Settings" + Path.DirectorySeparatorChar + settingsFileName;
-            
         }
     }
 }

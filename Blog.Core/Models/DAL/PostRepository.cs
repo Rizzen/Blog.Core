@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
@@ -10,9 +11,9 @@ namespace Blog.Core.Models.DAL
     {
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public IQueryable<Post> Posts => GetPostsFromDefaultDirectory();
+        public IEnumerable<Post> Posts => GetAllPostsFromDefaultDirectory();
 
-        public string Path => _hostingEnvironment.ContentRootPath;
+        private string _path => _hostingEnvironment.ContentRootPath;
         
         public PostRepository(IHostingEnvironment hostingEnvironment)
         {
@@ -20,12 +21,12 @@ namespace Blog.Core.Models.DAL
         }
         
         /// <summary>Returns posts from default directory</summary>
-        private IQueryable<Post> GetPostsFromDefaultDirectory()
+        private IEnumerable<Post> GetAllPostsFromDefaultDirectory()
         {
-            return Directory.GetFiles($"{_hostingEnvironment.ContentRootPath}/Views/_posts", "*.cshtml", SearchOption.AllDirectories)
-                                     .Select(p => p.Replace(_hostingEnvironment.ContentRootPath, "~"))
-                                     .Select(p => new Post {View = p})
-                                     .AsQueryable();
+            return Directory.GetFiles($"{_path}/Views/_posts", "*.cshtml", SearchOption.AllDirectories)
+                                     .Select(p => p.Replace(_path, "~"))
+                                     .Select(p => new Post {Contents = p})
+                                     .ToList();
         }
     }
 }

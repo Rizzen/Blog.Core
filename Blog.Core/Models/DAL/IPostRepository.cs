@@ -1,9 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Blog.Core.Models.DAL
 {
     public interface IPostRepository
     {
-        IQueryable<Post> Posts { get; }
+        IEnumerable<Post> Posts { get; }
     }
 }

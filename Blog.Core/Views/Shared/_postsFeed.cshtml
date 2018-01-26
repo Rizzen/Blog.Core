@@ -1,8 +1,8 @@
-﻿@model Blog.Core.Models.Templating.PostFeedDto 
+﻿@model Blog.Core.Models.Templating.PageContext 
 
 @foreach (var post in Model.Posts)
 {
     <div class="blog-post-list-item">
-        @Html.Partial(post.View)
+        @Html.Raw(post.Contents)
     </div>
 }

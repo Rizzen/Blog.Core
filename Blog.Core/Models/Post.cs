@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Blog.Core.Utils;
 
 namespace Blog.Core.Models
@@ -9,10 +10,12 @@ namespace Blog.Core.Models
         
         public string Author { get; set; }  
         
-        public string View { get; set; }   
+        public string Contents { get; set; } 
         
-        public List<string> Tags { get; set; }
+        public string Filename { get; set; }
         
-        public PostDateTime PostDateTime { get; set; }
+        public IEnumerable<string> Tags { get; set; }
+        
+        public DateTime DateTime { get; set; }
     }
 }

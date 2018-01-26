@@ -1,4 +1,5 @@
-﻿using Blog.Core.Models;
+﻿using System.Threading.Tasks;
+using Blog.Core.Models;
 using Blog.Core.Models.DAL;
 using Blog.Core.Models.Templating;
 using Microsoft.AspNetCore.Hosting;
@@ -10,18 +11,18 @@ namespace Blog.Core.Controllers
     public class HomeController : Controller
     {
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly PostsProcessor _postsProcessor;
+        private readonly BlogContext _postsProcessor;
         
         public HomeController(IHostingEnvironment hostingEnvironment,
-                              PostsProcessor postsProcessor)
+                              BlogContext postsProcessor)
         {
             _hostingEnvironment = hostingEnvironment;
             _postsProcessor = postsProcessor;
         }
 
-        public ViewResult Index()
+        public async Task<ViewResult> Index()
         {
-            return View(_postsProcessor.GetPostFeed());
+            return View(await _postsProcessor.GetPostFeed());
         }
     }
 }
