@@ -3,26 +3,26 @@ using System.Linq;
 
 namespace Blog.Core.Models.Templating
 {
-    public class PostCache
+    public class Cache<T>
     {
-        private IEnumerable<Post> _posts;
+        private IEnumerable<T> _cache;
         
-        public PostCache(IEnumerable<Post> initial)
+        public Cache(IEnumerable<T> initial)
         {
-            _posts = initial;
+            _cache = initial;
         }
 
-        public IEnumerable<Post> Get() => _posts;
+        public IEnumerable<T> Get() => _cache;
 
-        public void Store(IEnumerable<Post> toStore)
+        public void Store(IEnumerable<T> toStore)
         {
-            _posts = _posts.Concat(toStore)
+            _cache = _cache.Concat(toStore)
                            .Distinct();
         }
 
-        public void Delete(IEnumerable<Post> toDelete)
+        public void Delete(IEnumerable<T> toDelete)
         {
-            _posts = _posts.Except(toDelete);
+            _cache = _cache.Except(toDelete);
         }
     }
 }

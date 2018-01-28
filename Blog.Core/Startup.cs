@@ -41,7 +41,7 @@ namespace Blog.Core
             
             services.AddSingleton<PostAccumulator>();
             
-            services.AddSingleton<PostCache>();
+            services.AddSingleton<Cache<Post>>();
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
