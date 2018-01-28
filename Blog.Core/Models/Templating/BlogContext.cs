@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Blog.Core.Models.DAL;
 using Blog.Core.Models.Templating.Razor;
 using Microsoft.AspNetCore.Hosting;
-using RazorLight;
 
 namespace Blog.Core.Models.Templating
 {
@@ -32,12 +31,14 @@ namespace Blog.Core.Models.Templating
                 Posts = await ProcessTemplate(_postRepository.Posts)
             };
         }
-
+        
+        //TODO move to PostsProcessor
         private IEnumerable<Post> ProcessHeaders(IEnumerable<Post> posts)
         {
             return posts;
         }
 
+        //TODO move to PostsProcessor
         private async Task<IEnumerable<Post>> ProcessTemplate(IEnumerable<Post> posts)
         {
             var result = new List<Post>();

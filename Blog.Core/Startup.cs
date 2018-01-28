@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Blog.Core.Models.Settings;
 using Blog.Core.Models.Templating;
+using Blog.Core.Models.Templating.Processing;
+using Blog.Core.Models.Templating.Razor;
 
 namespace Blog.Core
 {
@@ -29,9 +31,17 @@ namespace Blog.Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            
             services.Configure<SiteSettings>(Configuration.GetSection("SiteSettings"));
-            services.AddSingleton<IPostRepository, PostRepository>();
-            services.AddSingleton<BlogContext>();
+            
+            services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<BlogContext>();
+            services.AddTransient<PostsProcessor>();
+            services.AddTransient<RazorEngine>();
+            
+            services.AddSingleton<PostAccumulator>();
+            
+            services.AddSingleton<PostCache>();
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -39,6 +49,7 @@ namespace Blog.Core
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.ApplicationServices.GetService<PostAccumulator>();
             
             app.UseMvc(routes => {
                 routes.MapRoute(
