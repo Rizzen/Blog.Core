@@ -14,9 +14,9 @@ namespace Blog.Core.Models.Pagination
             _postRepository = postRepository;
         }
 
-        public PageContext GetContext()
+        public PageContext GetContextForPage(int pageNum)
         {
-            return new PageContext();
+            return new PageContext(_blogContext, pageNum,_blogContext.PostsPerPage);
         }
     }
 }

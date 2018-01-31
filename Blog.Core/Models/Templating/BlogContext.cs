@@ -10,6 +10,9 @@ namespace Blog.Core.Models.Templating
 {
     public class BlogContext
     {
+        //BUG Harcoded for now
+        public int PostsPerPage = 10;
+        
         private readonly IPostRepository _postRepository;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly RazorEngine _engine;
@@ -26,6 +29,7 @@ namespace Blog.Core.Models.Templating
 
         public async Task<PageContext> GetPostFeed()
         {
+            //var result = 
             return new PageContext
             {
                 Posts = await ProcessTemplate(_postRepository.Posts)
