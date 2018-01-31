@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Blog.Core.Models.Templating
+namespace Blog.Core.Utils
 {
     public class Cache<T>
     {

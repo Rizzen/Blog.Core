@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Blog.Core.Models.DAL;
 
 namespace Blog.Core.Models.Templating.Processing
@@ -17,9 +18,9 @@ namespace Blog.Core.Models.Templating.Processing
             return new List<Post>();
         }
 
-        public IEnumerable<Post> ProcessTemplate(IEnumerable<Post> input)
+        public async Task<IEnumerable<Post>> ProcessTemplate(IEnumerable<Post> input)
         {
-            return new List<Post>();
+            return await new Task<List<Post>>(() => new List<Post>());
         }
     }
 }

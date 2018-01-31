@@ -16,9 +16,5 @@ namespace Blog.Core.Models.Templating.Processing
             _postsProcessor = postsProcessor;
         }
 
-        public void Example()
-        {
-            Console.WriteLine(_postRepository.Posts.Count());
-        }
     }
 }
