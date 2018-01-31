@@ -13,5 +13,11 @@ namespace Blog.Core.Models
             _context = context;
             _pageGenerator = pageGenerator;
         }
+
+        public PageContext GetPostFeed()
+        {
+            //BUG for now
+            return _pageGenerator.GetContextForPage(1);
+        }
     }
 }

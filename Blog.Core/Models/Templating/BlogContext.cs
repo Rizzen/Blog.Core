@@ -29,7 +29,6 @@ namespace Blog.Core.Models.Templating
 
         public async Task<PageContext> GetPostFeed()
         {
-            //var result = 
             return new PageContext
             {
                 Posts = await ProcessTemplate(_postRepository.Posts)
