@@ -14,7 +14,7 @@ namespace Blog.Core.Models.Templating.Razor
                           .Build();
         }
 
-        public async Task<string> ProcessTemplate(string name, string template, object model)
+        public async Task<string> ProcessTemplateAsync(string name, string template, object model)
         {
             return await _engine.CompileRenderAsync(name, template, model);
         }

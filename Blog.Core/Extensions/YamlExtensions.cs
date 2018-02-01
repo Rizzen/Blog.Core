@@ -1,12 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using YamlDotNet.RepresentationModel;
 
 namespace Blog.Core.Extensions
 {
     public static class YamlExtensions
     {
+        private static readonly Regex regex = new Regex(@"(?s:^---(.*?)---)");
+        
+        
+        public static IDictionary<string, object> YamlHeader(this string text)
+        {
+            var m = regex.Matches(text);
+            if (m.Count == 0)
+            {
+                return new Dictionary<string, object>();
+            }
+
+            return m[0].Groups[1].Value.ParseYaml();
+        }
+        
         public static IDictionary<string, object> ParseYaml(this string text)
         {
             var results = new Dictionary<string, object>();
@@ -30,6 +45,17 @@ namespace Blog.Core.Extensions
             }
             
             return results;
+        }
+        
+        public static string ExcludeHeader(this string text)
+        {
+            var m = regex.Matches(text);
+            if (m.Count == 0)
+                return text;
+
+            return text.Replace(m[0].Groups[0].Value, "")
+                       .TrimStart('\r', '\n')
+                       .TrimEnd();
         }
 
         private static object GetValue(YamlNode value)

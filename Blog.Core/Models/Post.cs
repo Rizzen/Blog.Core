@@ -5,13 +5,16 @@ namespace Blog.Core.Models
 {
     public class Post
     {
+        /// <summary>Title</summary>
         public string Title { get; set; } 
         
         public string Author { get; set; }  
         
         public string Contents { get; set; } 
         
-        public string Filename { get; set; }
+        /// <summary>Path to cshtml file</summary>
+        /// <remarks>Like "~/Views/_posts/example.cshtml"</remarks>
+        public string Filename { get; set; } 
         
         public string Path { get; set; }
         

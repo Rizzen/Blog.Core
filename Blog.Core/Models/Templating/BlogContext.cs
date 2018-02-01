@@ -55,7 +55,7 @@ namespace Blog.Core.Models.Templating
             
             foreach (var content in contents)
             {
-                var compiledView = await _engine.ProcessTemplate(content.Key, content.Value, model);
+                var compiledView = await _engine.ProcessTemplateAsync(content.Key, content.Value, model);
                 
                 result.Add(new Post
                 {

@@ -13,9 +13,9 @@ namespace Blog.Core.Models.Pagination
 
         private IEnumerable<Post> _posts;
 
-        public IEnumerable<Post> Posts =>_posts ?? (_posts = _blog.Posts.Skip((_pageNum - 1) * _postsPerPage)
-                                                                        .Take(_postsPerPage)
-                                                                        .ToList());
+        public IEnumerable<Post> Posts => _posts ?? (_posts = _blog.Posts.Skip((_pageNum - 1) * _postsPerPage)
+                                                                         .Take(_postsPerPage)
+                                                                         .ToList());
 
         public Paginator(BlogContext blog, int pageNum, int postsPerPage)
         {
