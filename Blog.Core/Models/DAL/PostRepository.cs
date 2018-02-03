@@ -26,7 +26,7 @@ namespace Blog.Core.Models.DAL
         {
             return Directory.GetFiles($"{_path}/Views/_posts", "*.cshtml", SearchOption.AllDirectories)
                                      .Select(p => p.Replace(_path, "~"))
-                                     .Select(p => new Post {Content = p}) //TODO - Change contents to Filename
+                                     .Select(p => new Post {Filename = p}) //TODO - Change contents to Filename
                                      .ToList();
         }
 

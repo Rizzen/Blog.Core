@@ -12,17 +12,18 @@ namespace Blog.Core.Controllers
     {
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly BlogContext _postsProcessor;
+        private readonly BlogMain _blog;
         
-        public HomeController(IHostingEnvironment hostingEnvironment,
-                              BlogContext postsProcessor)
+        public HomeController(IHostingEnvironment hostingEnvironment, BlogMain blog ,BlogContext postsProcessor)
         {
             _hostingEnvironment = hostingEnvironment;
             _postsProcessor = postsProcessor;
+            _blog = blog;
         }
 
-        public async Task<ViewResult> Index()
+        public ViewResult Index()
         {
-            return View(await _postsProcessor.GetPostFeed());
+            return View(_blog.GetPostFeed());
         }
     }
 }

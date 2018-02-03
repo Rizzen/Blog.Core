@@ -32,7 +32,7 @@ namespace Blog.Core.Models.Templating.Processing
                         .ExcludeHeader();
         }
 
-        public async Task<IEnumerable<Post>> ProcessTemplatesAsync(IEnumerable<Post> input, PageContext pageContext)
+        public async Task<List<Post>> ProcessTemplatesAsync(IEnumerable<Post> input, PageContext pageContext)
         {
             var tasks = await Task.WhenAll(input.Select(async x => await ProcessTemplateAsync(x, pageContext)));
             return tasks.ToList();

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Blog.Core.Models.DAL;
 using Blog.Core.Models.Templating.Processing;
 using Blog.Core.Utils;
@@ -11,7 +13,6 @@ namespace Blog.Core.Models.Templating
         private readonly PostsProcessor _postsProcessor;
         private readonly Cache<Post> _cache;
         
-        
         public PostFacade(IPostRepository postRepository, PostsProcessor postsProcessor, Cache<Post> cache)
         {
             _postRepository = postRepository;
@@ -20,9 +21,20 @@ namespace Blog.Core.Models.Templating
         }
 
         //TODO PageContext => IPageContext
-        public List<Post> GenRenderedPosts(IEnumerable<Post> input, PageContext model)
+        public async Task<List<Post>> GenRenderedPosts(IEnumerable<Post> input, PageContext model)
         {
-            return new List<Post>();
+            var toProcess = GetPostContent(input.ToList());
+            return await _postsProcessor.ProcessTemplatesAsync(toProcess, model);
+        }
+
+        private List<Post> GetPostContent(IList<Post> input)
+        {
+            foreach (var post in input)
+            {
+                post.Content = _postRepository.GetContentByFilename(post.Filename);
+            }
+
+            return input.ToList();
         }
     }
 }

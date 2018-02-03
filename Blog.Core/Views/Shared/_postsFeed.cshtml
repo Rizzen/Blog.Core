@@ -1,6 +1,6 @@
 ﻿@model Blog.Core.Models.Templating.PageContext 
 
-@foreach (var post in Model.Posts)
+@foreach (var post in Model.Paginator.Posts)
 {
     <div class="blog-post-list-item">
         @Html.Raw(post.Content)

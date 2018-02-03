@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Blog.Core.Models;
 using Blog.Core.Models.DAL;
+using Blog.Core.Models.Pagination;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,10 +31,14 @@ namespace Blog.Core
             
             services.Configure<SiteSettings>(Configuration.GetSection("SiteSettings"));
             
-            services.AddTransient<IPostRepository, PostRepository>();
-            services.AddTransient<BlogContext>();
-            services.AddTransient<PostsProcessor>();
             services.AddTransient<RazorEngine>();
+            
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<BlogContext>();
+            services.AddScoped<PostsProcessor>();
+            services.AddScoped<BlogMain>();
+            services.AddScoped<PageGenerator>();
+            services.AddScoped<PostFacade>();
             
             services.AddSingleton<Cache<Post>>();
         }

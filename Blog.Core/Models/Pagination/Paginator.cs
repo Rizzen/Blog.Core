@@ -12,11 +12,11 @@ namespace Blog.Core.Models.Pagination
         private readonly PageContext _pageContext;
 
         private List<Post> _posts;
-        
-        public List<Post> Posts => _posts.All(x => !x.Content.IsNullOrEmpty())
-                                   ? _facade.GenRenderedPosts(_posts, _pageContext).ToList()
-                                   : _posts;
-        
+
+        public IList<Post> Posts => _posts.All(x => x.Content.IsNullOrEmpty())
+                                                ? _facade.GenRenderedPosts(_posts, _pageContext).Result.ToList()
+                                                : _posts;
+
         public Paginator(PostFacade facade, PageContext pageContext, int pageNum, int postsPerPage)
         {
             _facade = facade;
