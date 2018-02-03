@@ -6,17 +6,17 @@ namespace Blog.Core.Models.Pagination
     public class PageGenerator
     {
         private readonly BlogContext _blogContext;
-        private readonly IPostRepository _postRepository;
+        private readonly PostFacade _facade;
 
-        public PageGenerator(BlogContext blogContext, IPostRepository postRepository)
+        public PageGenerator(BlogContext blogContext, PostFacade facade)
         {
             _blogContext = blogContext;
-            _postRepository = postRepository;
+            _facade = facade;
         }
 
         public PageContext GetContextForPage(int pageNum)
         {
-            return new PageContext(_blogContext, pageNum,_blogContext.PostsPerPage);
+            return new PageContext(_blogContext, _facade, pageNum, _blogContext.PostsPerPage);
         }
     }
 }

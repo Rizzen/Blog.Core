@@ -3,6 +3,7 @@ using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
 using Blog.Core.Models.DAL;
+using Blog.Core.Models.Templating.Processing;
 using Blog.Core.Models.Templating.Razor;
 using Microsoft.AspNetCore.Hosting;
 
@@ -16,8 +17,11 @@ namespace Blog.Core.Models.Templating
         private readonly IPostRepository _postRepository;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly RazorEngine _engine;
+        
+        //for test
+        private readonly PostsProcessor _postsProcessor;
 
-        public IEnumerable<Post> Posts => _postRepository.Posts;
+        public IList<Post> Posts => _postRepository.Posts;
         
         public BlogContext(IPostRepository postRepository,
                            IHostingEnvironment hostingEnvironment)
@@ -29,6 +33,7 @@ namespace Blog.Core.Models.Templating
 
         public async Task<PageContext> GetPostFeed()
         {
+            
             return new PageContext
             {
                 Posts = await ProcessTemplate(_postRepository.Posts)
@@ -46,10 +51,10 @@ namespace Blog.Core.Models.Templating
         {
             var result = new List<Post>();
             
-            var contents = posts.ToDictionary(x => x.Contents.Split('\\')
+            var contents = posts.ToDictionary(x => x.Content.Split('\\')
                                                          .Last()
                                                          .Replace(".cshtml", ""),
-                                              x => File.ReadAllText(x.Contents.Replace("~", _hostingEnvironment.ContentRootPath)));
+                                              x => File.ReadAllText(x.Content.Replace("~", _hostingEnvironment.ContentRootPath)));
 
             var model = new object();
             
@@ -60,7 +65,7 @@ namespace Blog.Core.Models.Templating
                 result.Add(new Post
                 {
                     Title = "Пост",
-                    Contents = compiledView
+                    Content = compiledView
                 });
             }
             

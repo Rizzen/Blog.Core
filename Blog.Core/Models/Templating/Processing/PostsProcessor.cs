@@ -11,13 +11,11 @@ namespace Blog.Core.Models.Templating.Processing
     {
         private readonly IPostRepository _postRepository;
         private readonly RazorEngine _engine;
-        private readonly BlogContext _blog;
         
-        public PostsProcessor(IPostRepository postRepository, RazorEngine engine, BlogContext blog)
+        public PostsProcessor(IPostRepository postRepository, RazorEngine engine)
         {
             _postRepository = postRepository;
             _engine = engine;
-            _blog = blog;
         }
 
         public IEnumerable<Post> ProcessMetadata(IEnumerable<Post> input)
@@ -27,22 +25,22 @@ namespace Blog.Core.Models.Templating.Processing
         
         public Post ProcessMetadata(Post input)
         {
-            if (input.Contents.IsNullOrEmpty())
-                input.Contents = _postRepository.GetContentByFilename(input.Filename);
+            if (input.Content.IsNullOrEmpty())
+                input.Content = _postRepository.GetContentByFilename(input.Filename);
             
             return input.ProcessTags()
                         .ExcludeHeader();
         }
 
-        public async Task<IEnumerable<Post>> ProcessTemplatesAsync(IEnumerable<Post> input)
+        public async Task<IEnumerable<Post>> ProcessTemplatesAsync(IEnumerable<Post> input, PageContext pageContext)
         {
-            var tasks = await Task.WhenAll(input.Select(async x => await ProcessTemplateAsync(x)));
+            var tasks = await Task.WhenAll(input.Select(async x => await ProcessTemplateAsync(x, pageContext)));
             return tasks.ToList();
         }
 
-        public async Task<Post> ProcessTemplateAsync(Post input)
+        public async Task<Post> ProcessTemplateAsync(Post input, PageContext pageContext)
         {
-            input.Contents = await _engine.ProcessTemplateAsync(input.Filename, input.Contents, _blog);
+            input.Content = await _engine.ProcessTemplateAsync(input.Filename, input.Content, pageContext);
             return input;
         }
     }

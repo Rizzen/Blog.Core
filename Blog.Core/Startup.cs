@@ -35,8 +35,6 @@ namespace Blog.Core
             services.AddTransient<PostsProcessor>();
             services.AddTransient<RazorEngine>();
             
-            services.AddSingleton<PostAccumulator>();
-            
             services.AddSingleton<Cache<Post>>();
         }
         
@@ -45,7 +43,6 @@ namespace Blog.Core
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.ApplicationServices.GetService<PostAccumulator>();
             
             app.UseMvc(routes => {
                 routes.MapRoute(

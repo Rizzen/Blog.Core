@@ -7,7 +7,7 @@ namespace Blog.Core.Extensions
     {
         public static Post ProcessTags(this Post post)
         {
-            var header = post.Contents.YamlHeader();
+            var header = post.Content.YamlHeader();
             
             if (header.ContainsKey("tags"))
                 post.Tags = header["tags"] as IEnumerable<string>;
@@ -17,7 +17,7 @@ namespace Blog.Core.Extensions
 
         public static Post ExcludeHeader(this Post post)
         {
-            post.Contents = post.Contents.ExcludeHeader();
+            post.Content = post.Content.ExcludeHeader();
             return post;
         }
     }

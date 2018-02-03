@@ -7,19 +7,22 @@ namespace Blog.Core.Models.Pagination
 {
     public class Paginator
     {
-        private readonly BlogContext _blog;
+        private readonly PostFacade _facade;
         private readonly int _pageNum;
         private readonly int _postsPerPage;
 
-        private IEnumerable<Post> _posts;
-
-        public IEnumerable<Post> Posts => _posts ?? (_posts = _blog.Posts.Skip((_pageNum - 1) * _postsPerPage)
+        private IList<Post> _posts;
+        
+        
+        //TODO rebuild to get 
+        /*public IEnumerable<Post> Posts => _posts ?? (_posts = _facade.Posts.Skip((_pageNum - 1) * _postsPerPage)
                                                                          .Take(_postsPerPage)
                                                                          .ToList());
-
-        public Paginator(BlogContext blog, int pageNum, int postsPerPage)
+        */
+        
+        public Paginator(PostFacade facade, int pageNum, int postsPerPage)
         {
-            _blog = blog;
+            _facade = facade;
             _pageNum = pageNum;
             _postsPerPage = postsPerPage;
         }
