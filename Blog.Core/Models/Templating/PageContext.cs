@@ -17,7 +17,7 @@ namespace Blog.Core.Models.Templating
         //TODO postsPerPage is temporary - pls remove it later
         public PageContext(BlogContext blog, PostFacade facade, int pageNum, int postsPerPage)
         {
-            Paginator = new Paginator(facade, pageNum, postsPerPage);
+            Paginator = new Paginator(facade, this, pageNum, postsPerPage);
             Blog = blog;
         }
     }

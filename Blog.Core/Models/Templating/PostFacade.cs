@@ -10,7 +10,8 @@ namespace Blog.Core.Models.Templating
         private readonly IPostRepository _postRepository;
         private readonly PostsProcessor _postsProcessor;
         private readonly Cache<Post> _cache;
-
+        
+        
         public PostFacade(IPostRepository postRepository, PostsProcessor postsProcessor, Cache<Post> cache)
         {
             _postRepository = postRepository;
@@ -18,8 +19,8 @@ namespace Blog.Core.Models.Templating
             _cache = cache;
         }
 
-
-        public IList<Post> GenRenderedPosts(IEnumerable<Post> input, PageContext model)
+        //TODO PageContext => IPageContext
+        public List<Post> GenRenderedPosts(IEnumerable<Post> input, PageContext model)
         {
             return new List<Post>();
         }
