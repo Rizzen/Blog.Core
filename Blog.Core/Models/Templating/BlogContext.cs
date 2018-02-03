@@ -12,16 +12,14 @@ namespace Blog.Core.Models.Templating
     public class BlogContext
     {
         //BUG Harcoded for now
+        //TODO Move to site setting
         public int PostsPerPage = 10;
         
         private readonly IPostRepository _postRepository;
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly RazorEngine _engine;
-        
-        //for test
-        private readonly PostsProcessor _postsProcessor;
+        private readonly RazorEngine _engine;       
 
-        public IList<Post> Posts => _postRepository.Posts;
+        public List<Post> Posts => _postRepository.Posts;
         
         public BlogContext(IPostRepository postRepository,
                            IHostingEnvironment hostingEnvironment)
@@ -41,13 +39,13 @@ namespace Blog.Core.Models.Templating
         }
         
         //TODO move to PostsProcessor
-        private IEnumerable<Post> ProcessHeaders(IEnumerable<Post> posts)
+        private List<Post> ProcessHeaders(IEnumerable<Post> posts)
         {
-            return posts;
+            return posts.ToList();
         }
 
         //TODO move to PostsProcessor
-        private async Task<IEnumerable<Post>> ProcessTemplate(IEnumerable<Post> posts)
+        private async Task<List<Post>> ProcessTemplate(IEnumerable<Post> posts)
         {
             var result = new List<Post>();
             

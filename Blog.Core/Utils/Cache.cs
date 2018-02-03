@@ -12,7 +12,7 @@ namespace Blog.Core.Utils
             _cache = initial.ToList();
         }
 
-        public IList<T> Get() => _cache;
+        public List<T> Get() => _cache;
 
         public void Store(IEnumerable<T> toStore)
         {

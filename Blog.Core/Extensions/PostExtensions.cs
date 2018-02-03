@@ -10,7 +10,7 @@ namespace Blog.Core.Extensions
             var header = post.Content.YamlHeader();
             
             if (header.ContainsKey("tags"))
-                post.Tags = header["tags"] as IEnumerable<string>;
+                post.Tags = header["tags"] as List<string>;
 
             return post;
         }

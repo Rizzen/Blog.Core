@@ -11,7 +11,7 @@ namespace Blog.Core.Models.Pagination
         private readonly int _pageNum;
         private readonly int _postsPerPage;
 
-        private IList<Post> _posts;
+        private List<Post> _posts;
         
         
         //TODO rebuild to get 

@@ -16,7 +16,7 @@ namespace Blog.Core.Models
         
         /// <summary>Tags</summary>
         /// <remarks>Metadata</remarks>
-        public IEnumerable<string> Tags { get; set; }
+        public List<string> Tags { get; set; }
         
         /// <summary>Publishing time</summary>
         /// <remarks>Metadata</remarks>

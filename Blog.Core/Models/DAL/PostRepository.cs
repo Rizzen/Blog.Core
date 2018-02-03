@@ -13,7 +13,7 @@ namespace Blog.Core.Models.DAL
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly Cache<Post> _cache;
         
-        public IList<Post> Posts => GetAllPostsFromDefaultDirectory();
+        public List<Post> Posts => GetAllPostsFromDefaultDirectory();
         
         private string _path => _hostingEnvironment.ContentRootPath;
         
@@ -22,7 +22,7 @@ namespace Blog.Core.Models.DAL
             _hostingEnvironment = hostingEnvironment;
         }
         
-        private IList<Post> GetAllPostsFromDefaultDirectory()
+        private List<Post> GetAllPostsFromDefaultDirectory()
         {
             return Directory.GetFiles($"{_path}/Views/_posts", "*.cshtml", SearchOption.AllDirectories)
                                      .Select(p => p.Replace(_path, "~"))
@@ -30,7 +30,7 @@ namespace Blog.Core.Models.DAL
                                      .ToList();
         }
 
-        public IList<string> GetContentByFilename(IEnumerable<string> names)
+        public List<string> GetContentByFilename(IEnumerable<string> names)
         {
             return names.Select(GetContentByFilename)
                         .ToList();
