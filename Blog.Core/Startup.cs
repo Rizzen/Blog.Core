@@ -2,6 +2,7 @@
 using Blog.Core.Models;
 using Blog.Core.Models.Contexts;
 using Blog.Core.Models.DAL;
+using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Pagination;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Blog.Core.Models.Settings;
 using Blog.Core.Models.Templating;
+using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Models.Templating.Processing;
 using Blog.Core.Models.Templating.Razor;
 using Blog.Core.Utils;
@@ -35,11 +37,11 @@ namespace Blog.Core
             services.AddTransient<RazorEngine>();
             
             services.AddScoped<IPostRepository, PostRepository>();
-            services.AddScoped<BlogContext>();
-            services.AddScoped<PostsProcessor>();
+            services.AddScoped<IBlogContext, BlogContext>();
+            services.AddScoped<IPostsProcessor, PostsProcessor>();
             services.AddScoped<BlogMain>();
             services.AddScoped<PageGenerator>();
-            services.AddScoped<PostFacade>();
+            services.AddScoped<IPostFacade, PostFacade>();
             
             services.AddSingleton<Cache<Post>>();
         }
@@ -62,7 +64,6 @@ namespace Blog.Core
                                     template: "{controller=About}/{action=Index}");
                 routes.MapRoute(name: "content",
                                     template: "{controller=Content}/{action=Content}");
-                
             });
         }
         

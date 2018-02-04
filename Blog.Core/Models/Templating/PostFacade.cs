@@ -3,18 +3,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Blog.Core.Models.Contexts;
 using Blog.Core.Models.DAL;
-using Blog.Core.Models.Templating.Processing;
+using Blog.Core.Models.Interfaces;
+using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Utils;
 
 namespace Blog.Core.Models.Templating
 {
-    public class PostFacade
+    public class PostFacade: IPostFacade
     {
         private readonly IPostRepository _postRepository;
-        private readonly PostsProcessor _postsProcessor;
+        private readonly IPostsProcessor _postsProcessor;
         private readonly Cache<Post> _cache;
         
-        public PostFacade(IPostRepository postRepository, PostsProcessor postsProcessor, Cache<Post> cache)
+        public PostFacade(IPostRepository postRepository, IPostsProcessor postsProcessor, Cache<Post> cache)
         {
             _postRepository = postRepository;
             _postsProcessor = postsProcessor;
@@ -22,7 +23,7 @@ namespace Blog.Core.Models.Templating
         }
 
         //TODO PageContext => IPageContext
-        public async Task<List<Post>> GenRenderedPosts(IEnumerable<Post> input, PageContext model)
+        public async Task<List<Post>> GenRenderedPosts(IEnumerable<Post> input, IPageContext model)
         {
             var postsWithContent = GetPostContent(input.ToList());
             var toProcess = _postsProcessor.ProcessMetadata(postsWithContent);

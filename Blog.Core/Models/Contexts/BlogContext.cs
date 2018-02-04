@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Blog.Core.Models.DAL;
+using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Templating;
+using Blog.Core.Models.Templating.Interfaces;
 
 namespace Blog.Core.Models.Contexts
 {
-    public class BlogContext
+    public class BlogContext: IBlogContext
     {
-        private readonly PostFacade _facade;
+        private readonly IPostFacade _facade;
 
         public List<Post> Posts => _facade.GetAllPostsMetadataOnly();
         
@@ -15,7 +17,7 @@ namespace Blog.Core.Models.Contexts
                                          .Distinct()
                                          .ToList();
         
-        public BlogContext(PostFacade facade)
+        public BlogContext(IPostFacade facade)
         {
             _facade = facade;
         }

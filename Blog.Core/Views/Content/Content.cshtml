@@ -1,5 +1,5 @@
 ﻿@inject Microsoft.Extensions.Options.IOptionsMonitor<SiteSettings> SiteSettings;
-@model Blog.Core.Models.Contexts.PageContext
+@model Blog.Core.Models.Interfaces.IPageContext
 @{
     ViewData["Title"] = $"Content of {SiteSettings.CurrentValue.Author}";
     ViewData["Description"] = SiteSettings.CurrentValue.Description;

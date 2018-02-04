@@ -1,18 +1,20 @@
 ﻿using Blog.Core.Models.Contexts;
 using Blog.Core.Models.DAL;
+using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Settings;
 using Blog.Core.Models.Templating;
+using Blog.Core.Models.Templating.Interfaces;
 using Microsoft.Extensions.Options;
 
 namespace Blog.Core.Models.Pagination
 {
     public class PageGenerator
     {
-        private readonly BlogContext _blogContext;
-        private readonly PostFacade _facade;
+        private readonly IBlogContext _blogContext;
+        private readonly IPostFacade _facade;
         private readonly int _postsPerPage;
         
-        public PageGenerator(BlogContext blogContext, PostFacade facade, IOptions<SiteSettings> siteSettings)
+        public PageGenerator(IBlogContext blogContext, IPostFacade facade, IOptions<SiteSettings> siteSettings)
         {
             _blogContext = blogContext;
             _facade = facade;

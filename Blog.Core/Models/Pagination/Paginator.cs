@@ -3,14 +3,16 @@ using System.Linq;
 using Blog.Core.Extensions;
 using Blog.Core.Models.Contexts;
 using Blog.Core.Models.DAL;
+using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Templating;
+using Blog.Core.Models.Templating.Interfaces;
 
 namespace Blog.Core.Models.Pagination
 {
     public class Paginator
     {
-        private readonly PostFacade _facade;
-        private readonly PageContext _pageContext;
+        private readonly IPostFacade _facade;
+        private readonly IPageContext _pageContext;
 
         private List<Post> _posts;
 
@@ -18,7 +20,7 @@ namespace Blog.Core.Models.Pagination
                                                 ? _facade.GenRenderedPosts(_posts, _pageContext).Result.ToList()
                                                 : _posts;
 
-        public Paginator(PostFacade facade, PageContext pageContext, int pageNum, int postsPerPage)
+        public Paginator(IPostFacade facade, IPageContext pageContext, int pageNum, int postsPerPage)
         {
             _facade = facade;
             _pageContext = pageContext;

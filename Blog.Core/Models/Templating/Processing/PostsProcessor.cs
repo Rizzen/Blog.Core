@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using Blog.Core.Extensions;
 using Blog.Core.Models.Contexts;
 using Blog.Core.Models.DAL;
+using Blog.Core.Models.Interfaces;
+using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Models.Templating.Razor;
 
 namespace Blog.Core.Models.Templating.Processing
 {
-    public class PostsProcessor
+    public class PostsProcessor: IPostsProcessor
     {
         private readonly IPostRepository _postRepository;
         private readonly RazorEngine _engine;
@@ -34,13 +36,13 @@ namespace Blog.Core.Models.Templating.Processing
                         .ExcludeHeader();
         }
 
-        public async Task<List<Post>> ProcessTemplatesAsync(IEnumerable<Post> input, PageContext pageContext)
+        public async Task<List<Post>> ProcessTemplatesAsync(IEnumerable<Post> input, IPageContext pageContext)
         {
             var tasks = await Task.WhenAll(input.Select(async x => await ProcessTemplateAsync(x, pageContext)));
             return tasks.ToList();
         }
 
-        public async Task<Post> ProcessTemplateAsync(Post input, PageContext pageContext)
+        public async Task<Post> ProcessTemplateAsync(Post input, IPageContext pageContext)
         {
             input.Content = await _engine.ProcessTemplateAsync(input.Filename, input.Content, pageContext);
             return input;
