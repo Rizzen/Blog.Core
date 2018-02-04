@@ -1,14 +1,15 @@
 ﻿using Blog.Core.Models.Contexts;
+using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Pagination;
 using Blog.Core.Models.Templating;
 
 namespace Blog.Core.Models
 {
-    public class BlogMain
+    public class BlogMain: IBlog
     {
-        private readonly PageGenerator _pageGenerator;
+        private readonly IPageGenerator _pageGenerator;
 
-        public BlogMain(PageGenerator pageGenerator)
+        public BlogMain(IPageGenerator pageGenerator)
         {
             _pageGenerator = pageGenerator;
         }

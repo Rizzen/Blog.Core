@@ -1,13 +1,14 @@
 ﻿using Blog.Core.Models;
+using Blog.Core.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Core.Controllers
 {
     public class ContentController : Controller
     {
-        private readonly BlogMain _blog;
+        private readonly IBlog _blog;
 
-        public ContentController(BlogMain blog)
+        public ContentController(IBlog blog)
         {
             _blog = blog;
         }

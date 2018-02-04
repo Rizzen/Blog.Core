@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Blog.Core.Models.Pagination
 {
-    public class PageGenerator
+    public class PageGenerator: IPageGenerator
     {
         private readonly IBlogContext _blogContext;
         private readonly IPostFacade _facade;

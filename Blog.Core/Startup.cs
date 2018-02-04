@@ -37,11 +37,11 @@ namespace Blog.Core
             services.AddTransient<RazorEngine>();
             
             services.AddScoped<IPostRepository, PostRepository>();
-            services.AddScoped<IBlogContext, BlogContext>();
             services.AddScoped<IPostsProcessor, PostsProcessor>();
-            services.AddScoped<BlogMain>();
-            services.AddScoped<PageGenerator>();
+            services.AddScoped<IPageGenerator, PageGenerator>();
+            services.AddScoped<IBlogContext, BlogContext>();
             services.AddScoped<IPostFacade, PostFacade>();
+            services.AddScoped<IBlog, BlogMain>();
             
             services.AddSingleton<Cache<Post>>();
         }
@@ -64,6 +64,8 @@ namespace Blog.Core
                                     template: "{controller=About}/{action=Index}");
                 routes.MapRoute(name: "content",
                                     template: "{controller=Content}/{action=Content}");
+                routes.MapRoute(name: "some",
+                                template: "{controller}/{action}");
             });
         }
         
