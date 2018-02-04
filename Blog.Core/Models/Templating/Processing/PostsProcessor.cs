@@ -33,6 +33,7 @@ namespace Blog.Core.Models.Templating.Processing
                 input.Content = _postRepository.GetContentByFilename(input.Filename);
             
             return input.ProcessTags()
+                        .ProcessTitle()
                         .ExcludeHeader();
         }
 

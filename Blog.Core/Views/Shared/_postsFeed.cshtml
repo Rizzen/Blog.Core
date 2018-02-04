@@ -2,6 +2,14 @@
 
 @foreach (var post in Model.Paginator.Posts)
 {
+    <span class="blog-post-meta">
+        <h2 class="blog-post-title">@post.Title</h2>
+        <b>Теги:</b>
+        @foreach (var tag in post.Tags)
+        {
+            <span class="badge badge-pill badge-info">@tag</span>
+        }
+    </span> <br/>
     <div class="blog-post-list-item">
         @Html.Raw(post.Content)
     </div>
