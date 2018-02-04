@@ -19,9 +19,10 @@ namespace Blog.Core.Models.Templating.Processing
             _engine = engine;
         }
 
-        public IEnumerable<Post> ProcessMetadata(IEnumerable<Post> input)
+        public List<Post> ProcessMetadata(IEnumerable<Post> input)
         {
-            return input.Select(ProcessMetadata);
+            return input.Select(ProcessMetadata)
+                        .ToList();
         }
         
         public Post ProcessMetadata(Post input)

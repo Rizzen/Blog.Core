@@ -24,7 +24,9 @@ namespace Blog.Core.Models.Templating
         //TODO PageContext => IPageContext
         public async Task<List<Post>> GenRenderedPosts(IEnumerable<Post> input, PageContext model)
         {
-            var toProcess = GetPostContent(input.ToList());
+            var postsWithContent = GetPostContent(input.ToList());
+            var toProcess = _postsProcessor.ProcessMetadata(postsWithContent);
+            
             return await _postsProcessor.ProcessTemplatesAsync(toProcess, model);
         }
 
