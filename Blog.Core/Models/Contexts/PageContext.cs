@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Blog.Core.Models.Pagination;
+using Blog.Core.Models.Templating;
 
-namespace Blog.Core.Models.Templating
+namespace Blog.Core.Models.Contexts
 {
     public class PageContext
     {
@@ -13,11 +13,15 @@ namespace Blog.Core.Models.Templating
         
         public Paginator Paginator { get; }
         public BlogContext Blog { get; }
-        
-        //TODO postsPerPage is temporary - pls remove it later
-        public PageContext(BlogContext blog, PostFacade facade, int pageNum, int postsPerPage)
+
+        public PageContext(BlogContext blog)
         {
             Blog = blog;
+        }
+        
+        //TODO postsPerPage is temporary - pls remove it later
+        public PageContext(BlogContext blog, PostFacade facade, int pageNum, int postsPerPage) : this(blog)
+        {
             Paginator = new Paginator(facade, this, pageNum, postsPerPage);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Blog.Core.Models;
+using Blog.Core.Models.Contexts;
 using Blog.Core.Models.DAL;
 using Blog.Core.Models.Pagination;
 using Microsoft.AspNetCore.Builder;
@@ -59,6 +60,9 @@ namespace Blog.Core
                                     template: "{controller=Home}/{action=Index}");
                 routes.MapRoute(name: "about",
                                     template: "{controller=About}/{action=Index}");
+                routes.MapRoute(name: "content",
+                                    template: "{controller=Content}/{action=Content}");
+                
             });
         }
         

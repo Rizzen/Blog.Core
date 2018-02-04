@@ -1,16 +1,15 @@
-﻿using Blog.Core.Models.Pagination;
+﻿using Blog.Core.Models.Contexts;
+using Blog.Core.Models.Pagination;
 using Blog.Core.Models.Templating;
 
 namespace Blog.Core.Models
 {
     public class BlogMain
     {
-        private readonly BlogContext _context;
         private readonly PageGenerator _pageGenerator;
 
-        public BlogMain(BlogContext context, PageGenerator pageGenerator)
+        public BlogMain(PageGenerator pageGenerator)
         {
-            _context = context;
             _pageGenerator = pageGenerator;
         }
 
@@ -18,6 +17,11 @@ namespace Blog.Core.Models
         {
             //BUG for now
             return _pageGenerator.GetContextForPage(1);
+        }
+
+        public PageContext GetBlogContent()
+        {
+            return _pageGenerator.GetMetadataOnlyContext();
         }
     }
 }

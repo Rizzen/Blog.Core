@@ -6,6 +6,8 @@
         
         public string Description { get; set; }
         
+        public int PostsPerPage { get; set; }
+        
         public string SiteName { get; set; }
     }
 }

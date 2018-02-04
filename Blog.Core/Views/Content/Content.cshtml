@@ -1,4 +1,5 @@
 ﻿@inject Microsoft.Extensions.Options.IOptionsMonitor<SiteSettings> SiteSettings;
+@model Blog.Core.Models.Contexts.PageContext
 @{
     ViewData["Title"] = $"Content of {SiteSettings.CurrentValue.Author}";
     ViewData["Description"] = SiteSettings.CurrentValue.Description;
@@ -15,6 +16,12 @@
 
 <div class="container">
     <h2>List of Posts</h2>
+    @foreach (var post in Model.Blog.Posts)
+    {
+        <div class="blog-post-list-item">
+            @Html.Raw(post.Filename)
+        </div>
+    }
 </div>
 
 </body>

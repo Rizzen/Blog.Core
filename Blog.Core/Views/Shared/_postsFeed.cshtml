@@ -1,4 +1,5 @@
-﻿@model Blog.Core.Models.Templating.PageContext 
+﻿@using Blog.Core.Models.Contexts
+@model Blog.Core.Models.Contexts.PageContext 
 
 @foreach (var post in Model.Paginator.Posts)
 {
