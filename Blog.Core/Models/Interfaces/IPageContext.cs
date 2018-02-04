@@ -1,5 +1,4 @@
-﻿using Blog.Core.Models.Contexts;
-using Blog.Core.Models.Pagination;
+﻿using Blog.Core.Models.Pagination;
 
 namespace Blog.Core.Models.Interfaces
 {

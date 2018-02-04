@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using Blog.Core.Utils;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Internal;
 
 namespace Blog.Core.Models.DAL
 {

@@ -1,8 +1,6 @@
 ﻿using Blog.Core.Models.Contexts;
-using Blog.Core.Models.DAL;
 using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Settings;
-using Blog.Core.Models.Templating;
 using Blog.Core.Models.Templating.Interfaces;
 using Microsoft.Extensions.Options;
 

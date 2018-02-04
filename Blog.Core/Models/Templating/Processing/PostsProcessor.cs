@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Blog.Core.Extensions;
-using Blog.Core.Models.Contexts;
 using Blog.Core.Models.DAL;
 using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Templating.Interfaces;

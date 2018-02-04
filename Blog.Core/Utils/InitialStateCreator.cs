@@ -1,8 +1,6 @@
 ﻿using Blog.Core.Models;
 using Blog.Core.Models.DAL;
-using Blog.Core.Models.Templating;
 using Blog.Core.Models.Templating.Interfaces;
-using Blog.Core.Models.Templating.Processing;
 
 namespace Blog.Core.Utils
 {

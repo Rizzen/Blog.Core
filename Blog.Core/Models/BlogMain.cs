@@ -1,7 +1,5 @@
 ﻿using Blog.Core.Models.Contexts;
 using Blog.Core.Models.Interfaces;
-using Blog.Core.Models.Pagination;
-using Blog.Core.Models.Templating;
 
 namespace Blog.Core.Models
 {

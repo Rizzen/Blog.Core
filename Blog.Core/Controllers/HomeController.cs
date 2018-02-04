@@ -1,6 +1,4 @@
-﻿using Blog.Core.Models;
-using Blog.Core.Models.Interfaces;
-using Microsoft.AspNetCore.Hosting;
+﻿using Blog.Core.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Core.Controllers
