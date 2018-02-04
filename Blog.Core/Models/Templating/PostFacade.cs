@@ -30,6 +30,12 @@ namespace Blog.Core.Models.Templating
             return await _postsProcessor.ProcessTemplatesAsync(toProcess, model);
         }
 
+
+        public List<Post> GetAllPostsMetadataOnly()
+        {
+            return _postsProcessor.ProcessMetadata(_postRepository.Posts);
+        }
+
         private List<Post> GetPostContent(IList<Post> input)
         {
             foreach (var post in input)

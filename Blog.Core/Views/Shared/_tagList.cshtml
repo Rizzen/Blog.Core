@@ -1,1 +1,9 @@
-﻿<h3>Tag List</h3>
+﻿@model Blog.Core.Models.Contexts.PageContext 
+
+<h3>Tag List</h3> 
+<ul>
+    @foreach (var tag in Model.Blog.Tags)
+    {
+        <li>@tag</li>
+    }
+</ul>

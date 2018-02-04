@@ -1,20 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Blog.Core.Models.DAL;
+using Blog.Core.Models.Templating;
 
 namespace Blog.Core.Models.Contexts
 {
     public class BlogContext
     {
-        //BUG Harcoded for now
-        //TODO Move to site setting
-        public int PostsPerPage = 10;
+        private readonly PostFacade _facade;
+
+        public List<Post> Posts => _facade.GetAllPostsMetadataOnly();
         
-        private readonly IPostRepository _postRepository;
-        public List<Post> Posts => _postRepository.Posts;
+        public List<string> Tags => Posts.SelectMany(x => x.Tags)
+                                         .Distinct()
+                                         .ToList();
         
-        public BlogContext(IPostRepository postRepository)
+        public BlogContext(PostFacade facade)
         {
-            _postRepository = postRepository;
+            _facade = facade;
         }
     }
 }
