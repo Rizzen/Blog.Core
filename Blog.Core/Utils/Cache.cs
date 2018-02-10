@@ -9,22 +9,36 @@ namespace Blog.Core.Utils
         
         public Cache(IEnumerable<T> initial)
         {
-            _cache = initial.ToList();
+            if (initial != null)
+            {
+                _cache = initial.ToList();
+            }
         }
 
         public List<T> Get() => _cache;
 
         public void Store(IEnumerable<T> toStore)
         {
-            _cache = _cache.Concat(toStore)
-                           .Distinct()
-                           .ToList();
+            if (toStore != null)
+            {
+                _cache = _cache.Concat(toStore)
+                    .Distinct()
+                    .ToList();
+            }
         }
 
         public void Delete(IEnumerable<T> toDelete)
         {
-            _cache = _cache.Except(toDelete)
-                           .ToList();
+            if (toDelete != null)
+            {
+                _cache = _cache.Except(toDelete)
+                    .ToList();
+            }
+        }
+
+        public void Clear()
+        {
+            _cache = new List<T>(0);
         }
     }
 }

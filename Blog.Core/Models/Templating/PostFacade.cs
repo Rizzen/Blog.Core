@@ -22,7 +22,6 @@ namespace Blog.Core.Models.Templating
             _cache = cache;
         }
 
-        //TODO PageContext => IPageContext
         public async Task<List<Post>> GenRenderedPosts(IEnumerable<Post> input, IPageContext model)
         {
             var postsWithContent = GetPostContent(input.ToList());
@@ -30,7 +29,6 @@ namespace Blog.Core.Models.Templating
             
             return await _postsProcessor.ProcessTemplatesAsync(toProcess, model);
         }
-
 
         public List<Post> GetAllPostsMetadataOnly()
         {

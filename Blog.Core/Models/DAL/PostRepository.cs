@@ -10,13 +10,12 @@ namespace Blog.Core.Models.DAL
     public class PostRepository: IPostRepository
     {
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly Cache<Post> _cache;
         
         public List<Post> Posts => GetAllPostsFromDefaultDirectory();
         
         private string _path => _hostingEnvironment.ContentRootPath;
         
-        public PostRepository(IHostingEnvironment hostingEnvironment, Cache<Post> cache)
+        public PostRepository(IHostingEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
         }
@@ -25,7 +24,7 @@ namespace Blog.Core.Models.DAL
         {
             return Directory.GetFiles($"{_path}/Views/_posts", "*.cshtml", SearchOption.AllDirectories)
                                      .Select(p => p.Replace(_path, "~"))
-                                     .Select(p => new Post {Filename = p}) //TODO - Change contents to Filename
+                                     .Select(p => new Post {Filename = p})
                                      .ToList();
         }
 
