@@ -32,7 +32,7 @@ namespace Blog.Core.Utils
             if (toDelete != null)
             {
                 _cache = _cache.Except(toDelete)
-                    .ToList();
+                               .ToList();
             }
         }
 

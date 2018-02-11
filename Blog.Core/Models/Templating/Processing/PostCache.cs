@@ -30,14 +30,19 @@ namespace Blog.Core.Models.Templating.Processing
             _cache.Store(delta.Item2);
         }
 
-        public (List<Post>, List<Post>) CalculateDelta(List<Post> cache, List<Post> repository)
+        public (List<Post>, List<Post>) CalculateDelta(List<Post> cachedPosts, List<Post> repositoryPosts)
         {
-            var toRemove = cache.Except(repository).Any()
-                           ? cache.Except(repository).ToList()
+            if (cachedPosts == null || repositoryPosts == null)
+            {
+                return (new List<Post>(), new List<Post>());
+            }
+            
+            var toRemove = cachedPosts.Except(repositoryPosts).Any()
+                           ? cachedPosts.Except(repositoryPosts).ToList()
                            : null;
 
-            var toAdd = repository.Except(cache).Any()
-                        ? repository.Except(cache).ToList()
+            var toAdd = repositoryPosts.Except(cachedPosts).Any()
+                        ? repositoryPosts.Except(cachedPosts).ToList()
                         : null;
             
             return (toRemove, toAdd);

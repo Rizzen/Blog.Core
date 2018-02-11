@@ -98,7 +98,58 @@ namespace Blog.Core.Tests
             };
             
             Assert.AreEqual(postCache.Posts, expectingResult);
+        }
+        
+        [Test]
+        public void CalcDeltaTest_WhenNoData()
+        {
+            //Arrange
+            var postsInFilesystem = new List<Post>();
+
+            var cachedPosts = new List<Post>();
             
+            var repository = new Mock<IPostRepository>();
+            repository.Setup(x => x.Posts).Returns(postsInFilesystem);
+            
+            var cache = new Cache<Post>(cachedPosts);
+            var postCache = new PostCache(cache, repository.Object);
+            
+            //Act
+            postCache.CheckAndUpdate();
+            
+            postCache.Posts.ForEach(x => Console.WriteLine(x.Filename));
+            
+            //Assert
+            Assert.AreEqual(postCache.Posts.Count, 0);
+        }
+        
+        [Test]
+        public void CalcDeltaTest_WhenNull()
+        {
+            //Arrange
+            var postsInFilesystem = (List<Post>) null;
+
+            var cachedPosts = new List<Post>()
+            {
+                new Post {Filename = "first"},
+                new Post {Filename = "second"},
+                new Post {Filename = "third"},
+                new Post {Filename = "forth"},
+            };
+            
+            var repository = new Mock<IPostRepository>();
+            repository.Setup(x => x.Posts).Returns(postsInFilesystem);
+            
+            var cache = new Cache<Post>(cachedPosts);
+            var postCache = new PostCache(cache, repository.Object);
+            
+            //Act
+            postCache.CheckAndUpdate();
+            
+            postCache.Posts.ForEach(x => Console.WriteLine(x.Filename));
+            
+            //Assert
+            Assert.AreEqual(postCache.Posts.Count, cachedPosts.Count);
         }
     }
 }
