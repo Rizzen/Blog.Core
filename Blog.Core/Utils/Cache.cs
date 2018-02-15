@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Blog.Core.Utils
 {
-    public class Cache<T>
+    public class Cache<T>: ICache<T>
     {
         private List<T> _cache;
         
@@ -27,18 +27,13 @@ namespace Blog.Core.Utils
             }
         }
 
-        public void Delete(IEnumerable<T> toDelete)
+        public void Remove(IEnumerable<T> toDelete)
         {
             if (toDelete != null)
             {
                 _cache = _cache.Except(toDelete)
                                .ToList();
             }
-        }
-
-        public void Clear()
-        {
-            _cache = new List<T>(0);
         }
     }
 }

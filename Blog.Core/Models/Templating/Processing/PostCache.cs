@@ -8,12 +8,12 @@ namespace Blog.Core.Models.Templating.Processing
 {
     public class PostCache
     {
-        private readonly Cache<Post> _cache;
+        private readonly ICache<Post> _cache;
         private readonly IPostRepository _postRepository;
 
         public List<Post> Posts => _cache.Get();
 
-        public PostCache(Cache<Post> cache, IPostRepository repository)
+        public PostCache(ICache<Post> cache, IPostRepository repository)
         {
             _cache = cache;
             _postRepository = repository;
@@ -26,7 +26,7 @@ namespace Blog.Core.Models.Templating.Processing
             
             var delta = CalculateDelta(cached, currentPosts);
             
-            _cache.Delete(delta.Item1);
+            _cache.Remove(delta.Item1);
             _cache.Store(delta.Item2);
         }
 

@@ -36,7 +36,7 @@ namespace Blog.Core.Tests
             var repository = new Mock<IPostRepository>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
-            var cache = new Cache<Post>(cachedPosts);
+            var cache = new ConcurrentCache<Post>(cachedPosts);
             
             var postCache = new PostCache(cache, repository.Object);
             
@@ -53,8 +53,11 @@ namespace Blog.Core.Tests
                 new Post {Filename = "first"},
                 new Post {Filename = "forth"},
             };
-            
-            Assert.AreEqual(postCache.Posts, expectingResult);
+
+            foreach (var post in expectingResult)
+            {
+                Assert.Contains(post, postCache.Posts);
+            }
         }
         
         [Test]
@@ -80,7 +83,7 @@ namespace Blog.Core.Tests
             var repository = new Mock<IPostRepository>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
-            var cache = new Cache<Post>(cachedPosts);
+            var cache = new ConcurrentCache<Post>(cachedPosts);
             var postCache = new PostCache(cache, repository.Object);
             
             //Act
@@ -97,7 +100,10 @@ namespace Blog.Core.Tests
                 new Post {Filename = "forth"},
             };
             
-            Assert.AreEqual(postCache.Posts, expectingResult);
+            foreach (var post in expectingResult)
+            {
+                Assert.Contains(post, postCache.Posts);
+            }
         }
         
         [Test]
@@ -111,7 +117,7 @@ namespace Blog.Core.Tests
             var repository = new Mock<IPostRepository>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
-            var cache = new Cache<Post>(cachedPosts);
+            var cache = new ConcurrentCache<Post>(cachedPosts);
             var postCache = new PostCache(cache, repository.Object);
             
             //Act
@@ -140,7 +146,7 @@ namespace Blog.Core.Tests
             var repository = new Mock<IPostRepository>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
-            var cache = new Cache<Post>(cachedPosts);
+            var cache = new ConcurrentCache<Post>(cachedPosts);
             var postCache = new PostCache(cache, repository.Object);
             
             //Act
