@@ -43,7 +43,7 @@ namespace Blog.Core
             services.AddScoped<IPostFacade, PostFacade>();
             services.AddScoped<IBlog, BlogMain>();
             
-            services.AddSingleton<Cache<Post>>();
+            services.AddSingleton<ICache<Post>, ConcurrentCache<Post>>();
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

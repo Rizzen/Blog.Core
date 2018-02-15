@@ -27,6 +27,7 @@ namespace Blog.Core.Utils
         public void Store(IEnumerable<T> toStore)
         {
             var items = toStore?.ToList();
+            
             if (toStore != null && items.Any())
             {
                 foreach (var item in items)
@@ -39,6 +40,7 @@ namespace Blog.Core.Utils
         public void Remove(IEnumerable<T> toRemove)
         {
             var items = toRemove?.ToList();
+            
             if (toRemove != null && items.Any())
             {
                 foreach (var item in items)

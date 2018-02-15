@@ -13,9 +13,9 @@ namespace Blog.Core.Models.Templating
     {
         private readonly IPostRepository _postRepository;
         private readonly IPostsProcessor _postsProcessor;
-        private readonly Cache<Post> _cache;
+        private readonly ICache<Post> _cache;
         
-        public PostFacade(IPostRepository postRepository, IPostsProcessor postsProcessor, Cache<Post> cache)
+        public PostFacade(IPostRepository postRepository, IPostsProcessor postsProcessor, ICache<Post> cache)
         {
             _postRepository = postRepository;
             _postsProcessor = postsProcessor;
