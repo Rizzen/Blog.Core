@@ -17,6 +17,7 @@ namespace Blog.Core.Models.Templating.Processing
         {
             _cache = cache;
             _postRepository = repository;
+            CheckAndUpdate();
         }
 
         public void CheckAndUpdate()
@@ -25,12 +26,13 @@ namespace Blog.Core.Models.Templating.Processing
             var cached = _cache.Get();
             
             var delta = CalculateDelta(cached, currentPosts);
-            
+
             _cache.Remove(delta.Item1);
             _cache.Store(delta.Item2);
         }
 
-        public (List<Post>, List<Post>) CalculateDelta(List<Post> cachedPosts, List<Post> repositoryPosts)
+        private (List<Post>, List<Post>) CalculateDelta(IReadOnlyCollection<Post> cachedPosts,
+                                                        IReadOnlyCollection<Post> repositoryPosts)
         {
             if (cachedPosts == null || repositoryPosts == null)
             {
@@ -39,11 +41,11 @@ namespace Blog.Core.Models.Templating.Processing
             
             var toRemove = cachedPosts.Except(repositoryPosts).Any()
                            ? cachedPosts.Except(repositoryPosts).ToList()
-                           : null;
+                           : new List<Post>();
 
             var toAdd = repositoryPosts.Except(cachedPosts).Any()
                         ? repositoryPosts.Except(cachedPosts).ToList()
-                        : null;
+                        : new List<Post>();
             
             return (toRemove, toAdd);
         }

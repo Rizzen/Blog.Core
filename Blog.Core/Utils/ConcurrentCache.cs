@@ -28,7 +28,7 @@ namespace Blog.Core.Utils
         {
             var items = toStore?.ToList();
             
-            if (toStore != null && items.Any())
+            if (items != null && items.Any())
             {
                 foreach (var item in items)
                 {
@@ -41,7 +41,7 @@ namespace Blog.Core.Utils
         {
             var items = toRemove?.ToList();
             
-            if (toRemove != null && items.Any())
+            if (items != null && items.Any())
             {
                 foreach (var item in items)
                 {

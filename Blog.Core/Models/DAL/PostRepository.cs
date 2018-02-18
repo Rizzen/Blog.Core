@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Blog.Core.Utils;
 using Microsoft.AspNetCore.Hosting;
 
 namespace Blog.Core.Models.DAL
@@ -11,7 +10,7 @@ namespace Blog.Core.Models.DAL
     {
         private readonly IHostingEnvironment _hostingEnvironment;
         
-        public List<Post> Posts => GetAllPostsFromDefaultDirectory();
+        public List<Post> Posts => GetAllPostsWithNames();
         
         private string _path => _hostingEnvironment.ContentRootPath;
         
@@ -20,7 +19,7 @@ namespace Blog.Core.Models.DAL
             _hostingEnvironment = hostingEnvironment;
         }
         
-        private List<Post> GetAllPostsFromDefaultDirectory()
+        private List<Post> GetAllPostsWithNames()
         {
             return Directory.GetFiles($"{_path}/Views/_posts", "*.cshtml", SearchOption.AllDirectories)
                                      .Select(p => p.Replace(_path, "~"))

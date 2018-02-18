@@ -22,10 +22,6 @@ namespace Blog.Core.Models
         /// <remarks>Metadata</remarks>
         public DateTime DateTime { get; set; }
         
-        /// <summary>Is Content processed by RazorLight</summary>
-        /// <remarks>Metadata for Lazy Load</remarks>
-        public bool IsProcessed { get; set; }
-        
         /// <summary>Content</summary>
         public string Content { get; set; } 
         

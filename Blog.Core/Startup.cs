@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Blog.Core.Models;
 using Blog.Core.Models.Contexts;
 using Blog.Core.Models.DAL;
@@ -35,6 +36,7 @@ namespace Blog.Core
             services.Configure<SiteSettings>(Configuration.GetSection("SiteSettings"));
             
             services.AddTransient<RazorEngine>();
+            services.AddTransient<InitialStateCreator>();
             
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IPostsProcessor, PostsProcessor>();
@@ -42,15 +44,19 @@ namespace Blog.Core
             services.AddScoped<IBlogContext, BlogContext>();
             services.AddScoped<IPostFacade, PostFacade>();
             services.AddScoped<IBlog, BlogMain>();
+            services.AddScoped<PostCache>();
             
             services.AddSingleton<ICache<Post>, ConcurrentCache<Post>>();
         }
         
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+
+            var initor = serviceProvider.GetService<InitialStateCreator>();
+            initor.Init();
             
             app.UseMvc(routes => {
                 routes.MapRoute(
