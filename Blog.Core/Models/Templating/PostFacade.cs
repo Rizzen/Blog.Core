@@ -12,13 +12,13 @@ namespace Blog.Core.Models.Templating
 {
     public class PostFacade: IPostFacade
     {
-        private readonly IPostDAO _postDao;
+        private readonly IPostStore _postStore;
         private readonly IPostsProcessor _postsProcessor;
         private readonly ICache<Post> _cache;
         
-        public PostFacade(IPostDAO postDao, IPostsProcessor postsProcessor, ICache<Post> cache)
+        public PostFacade(IPostStore postStore, IPostsProcessor postsProcessor, ICache<Post> cache)
         {
-            _postDao = postDao;
+            _postStore = postStore;
             _postsProcessor = postsProcessor;
             _cache = cache;
         }
@@ -33,14 +33,14 @@ namespace Blog.Core.Models.Templating
 
         public List<Post> GetAllPostsMetadataOnly()
         {
-            return _postsProcessor.ProcessMetadata(_postDao.Posts);
+            return _postsProcessor.ProcessMetadata(_postStore.Posts);
         }
 
         private List<Post> GetPostContent(IList<Post> input)
         {
             foreach (var post in input)
             {
-                post.Content = _postDao.GetContentByFilename(post.Filename);
+                post.Content = _postStore.GetContentByFilename(post.Filename);
             }
 
             return input.ToList();

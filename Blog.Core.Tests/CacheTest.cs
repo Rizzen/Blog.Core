@@ -37,7 +37,7 @@ namespace Blog.Core.Tests
                 new Post {Filename = "third"},
             };
             
-            var dao = new Mock<IPostDAO>();
+            var dao = new Mock<IPostStore>();
             dao.Setup(x => x.Posts).Returns(postsInFilesystem);
             
             var cache = new ConcurrentCache<Post>(cachedPosts);
@@ -85,7 +85,7 @@ namespace Blog.Core.Tests
                 new Post {Filename = "forth"},
             };
             
-            var repository = new Mock<IPostDAO>();
+            var repository = new Mock<IPostStore>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
             var cache = new ConcurrentCache<Post>(cachedPosts);
@@ -119,7 +119,7 @@ namespace Blog.Core.Tests
 
             var cachedPosts = new List<Post>();
             
-            var repository = new Mock<IPostDAO>();
+            var repository = new Mock<IPostStore>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
             var cache = new ConcurrentCache<Post>(cachedPosts);
@@ -148,7 +148,7 @@ namespace Blog.Core.Tests
                 new Post {Filename = "forth"},
             };
             
-            var repository = new Mock<IPostDAO>();
+            var repository = new Mock<IPostStore>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
             var cache = new ConcurrentCache<Post>(cachedPosts);

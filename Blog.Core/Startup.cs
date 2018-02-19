@@ -40,7 +40,7 @@ namespace Blog.Core
             services.AddTransient<InitialStateCreator>();
             services.AddTransient<ICache<Post>, ConcurrentCache<Post>>();
             
-            services.AddScoped<IPostDAO, PostDAO>();
+            services.AddScoped<IPostStore, PostStore>();
             services.AddScoped<IPostsProcessor, PostsProcessor>();
             services.AddScoped<IPageGenerator, PageGenerator>();
             services.AddScoped<IBlogContext, BlogContext>();

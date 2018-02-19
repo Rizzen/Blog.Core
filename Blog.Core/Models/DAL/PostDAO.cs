@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Blog.Core.Models.DAL
 {
-    public class PostDAO: IPostDAO
+    public class PostStore: IPostStore
     {
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly SiteSettings _siteSettings;
@@ -17,7 +17,7 @@ namespace Blog.Core.Models.DAL
 
         private string _path => $"{_hostingEnvironment.ContentRootPath}{_siteSettings.PostsFolderPath}";
         
-        public PostDAO(IHostingEnvironment hostingEnvironment, IOptions<SiteSettings> siteSettings)
+        public PostStore(IHostingEnvironment hostingEnvironment, IOptions<SiteSettings> siteSettings)
         {
             _hostingEnvironment = hostingEnvironment;
             _siteSettings = siteSettings.Value;

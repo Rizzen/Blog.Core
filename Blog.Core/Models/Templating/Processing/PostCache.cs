@@ -13,20 +13,20 @@ namespace Blog.Core.Models.Templating.Processing
     public class PostCache: IDisposable
     {
         private readonly ICache<Post> _cache;
-        private readonly IPostDAO _postDao;
+        private readonly IPostStore _postStore;
 
         public List<Post> Posts => _cache.Get();
 
-        public PostCache(ICache<Post> cache, IPostDAO repository)
+        public PostCache(ICache<Post> cache, IPostStore repository)
         {
             _cache = cache;
-            _postDao = repository;
+            _postStore = repository;
             CheckAndUpdate();
         }
 
         public void CheckAndUpdate()
         {
-            var currentPosts = _postDao.Posts;
+            var currentPosts = _postStore.Posts;
             var cached = _cache.Get();
             
             var delta = CalculateDelta(cached, currentPosts);

@@ -2,7 +2,7 @@
 
 namespace Blog.Core.Models.DAL
 {
-    public interface IPostDAO
+    public interface IPostStore
     {
         List<Post> Posts { get; }
         string GetContentByFilename(string name);

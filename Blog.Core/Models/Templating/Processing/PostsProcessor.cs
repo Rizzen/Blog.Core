@@ -11,12 +11,12 @@ namespace Blog.Core.Models.Templating.Processing
 {
     public class PostsProcessor: IPostsProcessor
     {
-        private readonly IPostDAO _postDao;
+        private readonly IPostStore _postStore;
         private readonly RazorEngine _engine;
         
-        public PostsProcessor(IPostDAO postDao, RazorEngine engine)
+        public PostsProcessor(IPostStore postStore, RazorEngine engine)
         {
-            _postDao = postDao;
+            _postStore = postStore;
             _engine = engine;
         }
 
@@ -29,7 +29,7 @@ namespace Blog.Core.Models.Templating.Processing
         public Post ProcessMetadata(Post input)
         {
             if (input.Content.IsNullOrEmpty())
-                input.Content = _postDao.GetContentByFilename(input.Filename);
+                input.Content = _postStore.GetContentByFilename(input.Filename);
             
             return input.ProcessTags()
                         .ProcessTitle()
