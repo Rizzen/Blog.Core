@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using Blog.Core.Models;
 using Blog.Core.Models.DAL;
+using Blog.Core.Models.Settings;
 using Blog.Core.Models.Templating.Processing;
 using Blog.Core.Utils;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Moq;
 using NUnit.Framework;
 
@@ -33,12 +37,12 @@ namespace Blog.Core.Tests
                 new Post {Filename = "third"},
             };
             
-            var repository = new Mock<IPostRepository>();
-            repository.Setup(x => x.Posts).Returns(postsInFilesystem);
+            var dao = new Mock<IPostDAO>();
+            dao.Setup(x => x.Posts).Returns(postsInFilesystem);
             
             var cache = new ConcurrentCache<Post>(cachedPosts);
-            
-            var postCache = new PostCache(cache, repository.Object);
+
+            var postCache = new PostCache(cache, dao.Object);
             
             //Act
             postCache.CheckAndUpdate();
@@ -60,6 +64,7 @@ namespace Blog.Core.Tests
             }
         }
         
+        
         [Test]
         public void CalcDeltaTest_WithoutDelta()
         {
@@ -80,7 +85,7 @@ namespace Blog.Core.Tests
                 new Post {Filename = "forth"},
             };
             
-            var repository = new Mock<IPostRepository>();
+            var repository = new Mock<IPostDAO>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
             var cache = new ConcurrentCache<Post>(cachedPosts);
@@ -114,7 +119,7 @@ namespace Blog.Core.Tests
 
             var cachedPosts = new List<Post>();
             
-            var repository = new Mock<IPostRepository>();
+            var repository = new Mock<IPostDAO>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
             var cache = new ConcurrentCache<Post>(cachedPosts);
@@ -143,7 +148,7 @@ namespace Blog.Core.Tests
                 new Post {Filename = "forth"},
             };
             
-            var repository = new Mock<IPostRepository>();
+            var repository = new Mock<IPostDAO>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
             var cache = new ConcurrentCache<Post>(cachedPosts);

@@ -9,5 +9,7 @@
         public int PostsPerPage { get; set; }
         
         public string SiteName { get; set; }
+        
+        public string PostsFolderPath { get; set; }
     }
 }

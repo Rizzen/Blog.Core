@@ -1,28 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Blog.Core.Models.DAL;
+using Blog.Core.Models.Settings;
 using Blog.Core.Utils;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace Blog.Core.Models.Templating.Processing
 {
-    public class PostCache
+    public class PostCache: IDisposable
     {
         private readonly ICache<Post> _cache;
-        private readonly IPostRepository _postRepository;
+        private readonly IPostDAO _postDao;
 
         public List<Post> Posts => _cache.Get();
 
-        public PostCache(ICache<Post> cache, IPostRepository repository)
+        public PostCache(ICache<Post> cache, IPostDAO repository)
         {
             _cache = cache;
-            _postRepository = repository;
+            _postDao = repository;
             CheckAndUpdate();
         }
 
         public void CheckAndUpdate()
         {
-            var currentPosts = _postRepository.Posts;
+            var currentPosts = _postDao.Posts;
             var cached = _cache.Get();
             
             var delta = CalculateDelta(cached, currentPosts);
@@ -48,6 +52,11 @@ namespace Blog.Core.Models.Templating.Processing
                         : new List<Post>();
             
             return (toRemove, toAdd);
+        }
+
+        public void Dispose()
+        {
+            Console.WriteLine("Disposed");
         }
     }
 }

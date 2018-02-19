@@ -2,26 +2,30 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Blog.Core.Models.Settings;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace Blog.Core.Models.DAL
 {
-    public class PostRepository: IPostRepository
+    public class PostDAO: IPostDAO
     {
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly SiteSettings _siteSettings;
         
         public List<Post> Posts => GetAllPostsWithNames();
+
+        private string _path => $"{_hostingEnvironment.ContentRootPath}{_siteSettings.PostsFolderPath}";
         
-        private string _path => _hostingEnvironment.ContentRootPath;
-        
-        public PostRepository(IHostingEnvironment hostingEnvironment)
+        public PostDAO(IHostingEnvironment hostingEnvironment, IOptions<SiteSettings> siteSettings)
         {
             _hostingEnvironment = hostingEnvironment;
+            _siteSettings = siteSettings.Value;
         }
         
         private List<Post> GetAllPostsWithNames()
         {
-            return Directory.GetFiles($"{_path}/Views/_posts", "*.cshtml", SearchOption.AllDirectories)
+            return Directory.GetFiles(_path, "*.cshtml", SearchOption.AllDirectories)
                                      .Select(p => p.Replace(_path, "~"))
                                      .Select(p => new Post {Filename = p})
                                      .ToList();

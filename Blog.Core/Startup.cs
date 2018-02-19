@@ -32,21 +32,22 @@ namespace Blog.Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddOptions();
             
             services.Configure<SiteSettings>(Configuration.GetSection("SiteSettings"));
             
             services.AddTransient<RazorEngine>();
             services.AddTransient<InitialStateCreator>();
+            services.AddTransient<ICache<Post>, ConcurrentCache<Post>>();
             
-            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IPostDAO, PostDAO>();
             services.AddScoped<IPostsProcessor, PostsProcessor>();
             services.AddScoped<IPageGenerator, PageGenerator>();
             services.AddScoped<IBlogContext, BlogContext>();
             services.AddScoped<IPostFacade, PostFacade>();
             services.AddScoped<IBlog, BlogMain>();
-            services.AddScoped<PostCache>();
             
-            services.AddSingleton<ICache<Post>, ConcurrentCache<Post>>();
+            services.AddSingleton<PostCache>();
         }
         
         public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
