@@ -38,7 +38,6 @@ namespace Blog.Core
             
             services.AddTransient<RazorEngine>();
             services.AddTransient<InitialStateCreator>();
-            services.AddTransient<ICache<Post>, ConcurrentCache<Post>>();
             
             services.AddScoped<IPostStore, PostStore>();
             services.AddScoped<IPostsProcessor, PostsProcessor>();
@@ -46,8 +45,9 @@ namespace Blog.Core
             services.AddScoped<IBlogContext, BlogContext>();
             services.AddScoped<IPostFacade, PostFacade>();
             services.AddScoped<IBlog, BlogMain>();
-            
-            services.AddSingleton<PostCache>();
+            services.AddScoped<PostCache>();
+
+            services.AddSingleton<ICache<Post>, ConcurrentCache<Post>>();
         }
         
         public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)

@@ -28,14 +28,15 @@ namespace Blog.Core.Models.Templating.Processing
         
         public Post ProcessMetadata(Post input)
         {
-            if (input.Content.IsNullOrEmpty())
-                input.Content = _postStore.GetContentByFilename(input.Filename);
+            var header = _postStore.GetContentByFilename(input.Filename)
+                                   .YamlHeader();
             
-            return input.ProcessTags()
-                        .ProcessTitle()
-                        .ExcludeHeader();
-        }
+            input.Tags = header["tags"] as List<string>;
+            input.Title = header["title"] as string;
 
+            return input;
+        }
+        
         public async Task<List<Post>> ProcessTemplatesAsync(IEnumerable<Post> input, IPageContext pageContext)
         {
             var tasks = await Task.WhenAll(input.Select(async x => await ProcessTemplateAsync(x, pageContext)));

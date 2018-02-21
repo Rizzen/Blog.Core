@@ -17,10 +17,10 @@ namespace Blog.Core.Models.Templating.Processing
 
         public List<Post> Posts => _cache.Get();
 
-        public PostCache(ICache<Post> cache, IPostStore repository)
+        public PostCache(ICache<Post> cache, IPostStore postStore)
         {
             _cache = cache;
-            _postStore = repository;
+            _postStore = postStore;
             CheckAndUpdate();
         }
 
