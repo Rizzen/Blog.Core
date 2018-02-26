@@ -6,6 +6,7 @@ using System.Linq;
 using Blog.Core.Models;
 using Blog.Core.Models.DAL;
 using Blog.Core.Models.Settings;
+using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Models.Templating.Processing;
 using Blog.Core.Utils;
 using Microsoft.AspNetCore.Hosting;
@@ -39,10 +40,13 @@ namespace Blog.Core.Tests
             
             var dao = new Mock<IPostStore>();
             dao.Setup(x => x.Posts).Returns(postsInFilesystem);
+                
+            var processor = new Mock<IPostsProcessor>();
+            processor.Setup(x => x.ProcessMetadata(It.IsAny<IEnumerable<Post>>())).Returns((List<Post> val) => val);
             
             var cache = new ConcurrentCache<Post>(cachedPosts);
 
-            var postCache = new PostCache(cache, dao.Object);
+            var postCache = new PostCache(cache, dao.Object, processor.Object);
             
             //Act
             postCache.CheckAndUpdate();
@@ -88,8 +92,10 @@ namespace Blog.Core.Tests
             var repository = new Mock<IPostStore>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
+            var processor = new Mock<IPostsProcessor>();
+            
             var cache = new ConcurrentCache<Post>(cachedPosts);
-            var postCache = new PostCache(cache, repository.Object);
+            var postCache = new PostCache(cache, repository.Object, processor.Object);
             
             //Act
             postCache.CheckAndUpdate();
@@ -122,8 +128,10 @@ namespace Blog.Core.Tests
             var repository = new Mock<IPostStore>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
+            var processor = new Mock<IPostsProcessor>();
+            
             var cache = new ConcurrentCache<Post>(cachedPosts);
-            var postCache = new PostCache(cache, repository.Object);
+            var postCache = new PostCache(cache, repository.Object, processor.Object);
             
             //Act
             postCache.CheckAndUpdate();
@@ -151,8 +159,10 @@ namespace Blog.Core.Tests
             var repository = new Mock<IPostStore>();
             repository.Setup(x => x.Posts).Returns(postsInFilesystem);
             
+            var processor = new Mock<IPostsProcessor>();
+            
             var cache = new ConcurrentCache<Post>(cachedPosts);
-            var postCache = new PostCache(cache, repository.Object);
+            var postCache = new PostCache(cache, repository.Object, processor.Object);
             
             //Act
             postCache.CheckAndUpdate();

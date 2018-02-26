@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Blog.Core.Models.DAL;
-using Blog.Core.Models.Settings;
+using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Utils;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Options;
 
 namespace Blog.Core.Models.Templating.Processing
 {
@@ -14,13 +11,16 @@ namespace Blog.Core.Models.Templating.Processing
     {
         private readonly ICache<Post> _cache;
         private readonly IPostStore _postStore;
-
+        private readonly IPostsProcessor _postsProcessor;
+        
         public List<Post> Posts => _cache.Get();
 
-        public PostCache(ICache<Post> cache, IPostStore postStore)
+        public PostCache(ICache<Post> cache, IPostStore postStore, IPostsProcessor postsProcessor)
         {
             _cache = cache;
             _postStore = postStore;
+            _postsProcessor = postsProcessor;
+            
             CheckAndUpdate();
         }
 
@@ -32,7 +32,8 @@ namespace Blog.Core.Models.Templating.Processing
             var delta = CalculateDelta(cached, currentPosts);
 
             _cache.Remove(delta.Item1);
-            _cache.Store(delta.Item2);
+            var toadd = _postsProcessor.ProcessMetadata(delta.Item2);
+            _cache.Store(toadd);
         }
 
         private (List<Post>, List<Post>) CalculateDelta(IReadOnlyCollection<Post> cachedPosts,

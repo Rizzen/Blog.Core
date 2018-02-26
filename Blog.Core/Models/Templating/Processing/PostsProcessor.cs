@@ -28,8 +28,7 @@ namespace Blog.Core.Models.Templating.Processing
         
         public Post ProcessMetadata(Post input)
         {
-            var header = _postStore.GetContentByFilename(input.Filename)
-                                   .YamlHeader();
+            var header = _postStore.GetContentByFilename(input.Filename).YamlHeader();
             
             input.Tags = header["tags"] as List<string>;
             input.Title = header["title"] as string;

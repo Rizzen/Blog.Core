@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Blog.Core.Extensions;
-using Blog.Core.Models.Contexts;
 using Blog.Core.Models.DAL;
 using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Models.Templating.Processing;
-using Blog.Core.Utils;
 
 namespace Blog.Core.Models.Templating
 {
@@ -27,16 +24,13 @@ namespace Blog.Core.Models.Templating
         
         public async Task<List<Post>> GenRenderedPosts(IEnumerable<Post> input, IPageContext model)
         {
-            var postsWithContent = GetPostContent(input.ToList());
-            var toProcess = _postsProcessor.ProcessMetadata(postsWithContent);
+            var toProcess = GetPostContent(input.ToList());
             
             return await _postsProcessor.ProcessTemplatesAsync(toProcess, model);
         }
         
-        public List<Post> GetAllPostsMetadataOnly()
-        {
-            return _postsProcessor.ProcessMetadata(_postStore.Posts);
-        }
+        public List<Post> GetAllPostsMetadataOnly() => _cache.Posts;
+
         
         private List<Post> GetPostContent(IList<Post> input)
         {

@@ -11,9 +11,9 @@ namespace Blog.Core.Models.Pagination
         private readonly IPostFacade _facade;
         private readonly IPageContext _pageContext;
 
-        private List<Post> _posts;
+        private readonly List<Post> _posts;
 
-        public IList<Post> Posts => _posts.All(x => x.Content.IsNullOrEmpty())
+        public IList<Post> Posts => _posts.Any(x => x.Content.IsNullOrEmpty())
                                                 ? _facade.GenRenderedPosts(_posts, _pageContext).Result.ToList()
                                                 : _posts;
 
