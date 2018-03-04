@@ -12,9 +12,9 @@ namespace Blog.Core.Controllers
             _blog = blog;
         }
 
-        public ViewResult Index()
+        public ViewResult Index(int page = 1)
         {
-            return View(_blog.GetPostFeed());
+            return View(_blog.GetPostFeed(page));
         }
     }
 }

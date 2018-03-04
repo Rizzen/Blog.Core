@@ -4,7 +4,7 @@ namespace Blog.Core.Models.Interfaces
 {
     public interface IBlog
     {
-        PageContext GetPostFeed();
+        PageContext GetPostFeed(int page);
         PageContext GetBlogContent();
     }
 }

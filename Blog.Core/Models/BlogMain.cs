@@ -6,16 +6,16 @@ namespace Blog.Core.Models
     public class BlogMain: IBlog
     {
         private readonly IPageGenerator _pageGenerator;
+        private IBlog _blogImplementation;
 
         public BlogMain(IPageGenerator pageGenerator)
         {
             _pageGenerator = pageGenerator;
         }
 
-        public PageContext GetPostFeed()
+        public PageContext GetPostFeed(int page=1)
         {
-            //BUG for now
-            return _pageGenerator.GetContextForPage(1);
+            return _pageGenerator.GetContextForPage(page);
         }
 
         public PageContext GetBlogContent()
