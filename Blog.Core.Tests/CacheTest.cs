@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq;
 using Blog.Core.Models;
 using Blog.Core.Models.DAL;
-using Blog.Core.Models.Settings;
 using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Models.Templating.Processing;
 using Blog.Core.Utils;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Internal;
 using Moq;
 using NUnit.Framework;
 

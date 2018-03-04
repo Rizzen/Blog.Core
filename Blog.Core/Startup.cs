@@ -66,13 +66,15 @@ namespace Blog.Core
                     new { controller = "Home", action = "Index"}
                 );
                 routes.MapRoute(name: "index",
-                                    template: "{controller=Home}/{action=Index}");
+                                    template: "{controller=Home}/{action=Index}/");
                 routes.MapRoute(name: "about",
                                     template: "{controller=About}/{action=Index}");
                 routes.MapRoute(name: "content",
                                     template: "{controller=Content}/{action=Content}");
                 routes.MapRoute(name: "some",
                                 template: "{controller}/{action}");
+                routes.MapRoute(name: "pagination",
+                                template: "{controller}/{action}/{page?}");
             });
         }
         

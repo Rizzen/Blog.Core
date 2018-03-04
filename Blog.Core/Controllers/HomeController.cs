@@ -12,6 +12,7 @@ namespace Blog.Core.Controllers
             _blog = blog;
         }
 
+        [HttpGet]
         public ViewResult Index(int page = 1)
         {
             return View(_blog.GetPostFeed(page));
