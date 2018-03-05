@@ -72,9 +72,9 @@ namespace Blog.Core
                 routes.MapRoute(name: "content",
                                     template: "{controller=Content}/{action=Content}");
                 routes.MapRoute(name: "some",
-                                template: "{controller}/{action}");
+                                    template: "{controller}/{action}");
                 routes.MapRoute(name: "pagination",
-                                template: "{controller}/{action}/{page?}");
+                                    template: "{controller}/{action}/{page?}");
             });
         }
         
