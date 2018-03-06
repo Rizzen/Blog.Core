@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/gfhe41llpm74wgg8/branch/master?svg=true)]
+![Build status](https://ci.appveyor.com/api/projects/status/gfhe41llpm74wgg8/branch/master?svg=true)
 # Blog.Core
 My simple ASP.NET Core blog engine workbench.
 
