@@ -4,7 +4,6 @@
     <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Properties\PublishProfiles\kilooscartango - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
