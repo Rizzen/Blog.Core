@@ -10,21 +10,21 @@ namespace Blog.Core.Models.Contexts
     public class BlogContext: IBlogContext
     {
         private readonly IPostFacade _facade;
-        private readonly int _postsPerPage;
 
-        
+        public int PageCount { get; }
+
         public List<Post> Posts => _facade.GetAllPostsMetadataOnly();
-
-        public int TotalPages => Posts.Count / _postsPerPage;
-        
+       
         public List<string> Tags => Posts.SelectMany(x => x.Tags)
                                          .Distinct()
                                          .ToList();
         
         public BlogContext(IPostFacade facade, IOptions<SiteSettings> siteSetting)
         {
-            _postsPerPage = siteSetting.Value.PostsPerPage;
+            var postsPerPage = siteSetting.Value.PostsPerPage;
             _facade = facade;
+            
+            PageCount = Posts.Count / postsPerPage;
         }
     }
 }

@@ -6,7 +6,6 @@ namespace Blog.Core.Models
     public class BlogMain: IBlog
     {
         private readonly IPageGenerator _pageGenerator;
-        private IBlog _blogImplementation;
 
         public BlogMain(IPageGenerator pageGenerator)
         {

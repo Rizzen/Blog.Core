@@ -6,5 +6,6 @@ namespace Blog.Core.Models.Interfaces
     {
         List<Post> Posts { get; }
         List<string> Tags { get; }
+        int PageCount { get; }
     }
 }
