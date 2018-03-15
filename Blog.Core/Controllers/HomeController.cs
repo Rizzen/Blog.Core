@@ -17,5 +17,6 @@ namespace Blog.Core.Controllers
         {
             return View(_blog.GetPostFeed(page));
         }
+
     }
 }

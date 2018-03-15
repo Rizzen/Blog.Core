@@ -12,14 +12,12 @@ namespace Blog.Core.Models.Pagination
         private readonly IPostFacade _facade;
         private readonly int _postsPerPage;
 
-        public int PageCount { get; }
         
         public PageGenerator(IBlogContext blogContext, IPostFacade facade, IOptions<SiteSettings> siteSettings)
         {
             _blogContext = blogContext;
             _facade = facade;
             _postsPerPage = siteSettings.Value.PostsPerPage;
-            PageCount = _blogContext.Posts.Count / _postsPerPage;
         }
 
         public PageContext GetContextForPage(int pageNum)

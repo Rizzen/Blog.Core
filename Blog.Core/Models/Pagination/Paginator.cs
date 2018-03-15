@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Blog.Core.Extensions;
 using Blog.Core.Models.Interfaces;
@@ -13,18 +14,22 @@ namespace Blog.Core.Models.Pagination
         
         private readonly List<Post> _posts;
 
-        public int PageNumber { get; }
+        public int PageNumber { get; set; }
         
-        public IList<Post> Posts => _posts.Any(x => x.Content.IsNullOrEmpty())
+        public int PageCount { get; set; }
+        
+        public List<Post> Posts => _posts.Any(x => x.Content.IsNullOrEmpty())
                                                 ? _facade.GenRenderedPosts(_posts, _pageContext).Result.ToList()
                                                 : _posts;
 
         public Paginator(IPostFacade facade, IPageContext pageContext, int pageNum, int postsPerPage)
         {
+            _pageContext = pageContext;
             PageNumber = pageNum;
+            var pages = (double) _pageContext.Blog.Posts.Count / postsPerPage;
+            PageCount = (int) Math.Ceiling(pages);
             
             _facade = facade;
-            _pageContext = pageContext;
             _posts = _pageContext.Blog.Posts.Skip((PageNumber - 1) * postsPerPage)
                                             .Take(postsPerPage)
                                             .ToList();
