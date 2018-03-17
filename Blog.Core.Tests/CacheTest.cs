@@ -33,10 +33,12 @@ namespace Blog.Core.Tests
             };
             
             var dao = new Mock<IPostStore>();
-            dao.Setup(x => x.Posts).Returns(postsInFilesystem);
+            dao.Setup(x => x.Posts)
+               .Returns(postsInFilesystem);
                 
             var processor = new Mock<IPostsProcessor>();
-            processor.Setup(x => x.ProcessMetadata(It.IsAny<IEnumerable<Post>>())).Returns((List<Post> val) => val);
+            processor.Setup(x => x.ProcessMetadata(It.IsAny<IEnumerable<Post>>()))
+                     .Returns((List<Post> val) => val);
             
             var cache = new ConcurrentCache<Post>(cachedPosts);
 
@@ -97,7 +99,7 @@ namespace Blog.Core.Tests
             postCache.Posts.ForEach(x => Console.WriteLine(x.Filename));
             
             //Assert
-            var expectingResult = new List<Post>()
+            var expectingResult = new List<Post>
             {
                 new Post {Filename = "first"},
                 new Post {Filename = "second"},
@@ -135,7 +137,7 @@ namespace Blog.Core.Tests
             //Assert
             Assert.AreEqual(postCache.Posts.Count, 0);
         }
-        
+
         [Test]
         public void CalcDeltaTest_WhenNull()
         {
@@ -147,11 +149,12 @@ namespace Blog.Core.Tests
                 new Post {Filename = "first"},
                 new Post {Filename = "second"},
                 new Post {Filename = "third"},
-                new Post {Filename = "forth"},
+                new Post {Filename = "forth"}
             };
             
             var repository = new Mock<IPostStore>();
-            repository.Setup(x => x.Posts).Returns(postsInFilesystem);
+            repository.Setup(x => x.Posts)
+                      .Returns(postsInFilesystem);
             
             var processor = new Mock<IPostsProcessor>();
             

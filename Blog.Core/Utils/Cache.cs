@@ -22,8 +22,8 @@ namespace Blog.Core.Utils
             if (toStore != null)
             {
                 _cache = _cache.Concat(toStore)
-                    .Distinct()
-                    .ToList();
+                               .Distinct()
+                               .ToList();
             }
         }
 

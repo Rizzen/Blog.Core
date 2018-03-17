@@ -60,21 +60,15 @@ namespace Blog.Core
             initor.Init();
             
             app.UseMvc(routes => {
-                routes.MapRoute(
-                    "Default", 
-                    "{controller}/{action}",
-                    new { controller = "Home", action = "Index"}
-                );
-                routes.MapRoute(name: "index",
-                                    template: "{controller=Home}/{action=Index}/");
-                routes.MapRoute(name: "about",
-                                    template: "{controller=About}/{action=Index}");
-                routes.MapRoute(name: "content",
-                                    template: "{controller=Content}/{action=Content}");
-                routes.MapRoute(name: "some",
-                                    template: "{controller}/{action}");
                 routes.MapRoute(name: "pagination",
-                                    template: "{controller}/{action}/{page?}");
+                                template: "Home/Index{page}",
+                                defaults: new {Controller = "Home", action = "Index" });
+                routes.MapRoute(name: "default", 
+                                template: "{controller=Home}/{action=Index}");
+                routes.MapRoute(name: "about",
+                                template: "{controller=About}/{action=Index}");
+                routes.MapRoute(name: "content",
+                                template: "{controller=Content}/{action=Content}");
             });
         }
         

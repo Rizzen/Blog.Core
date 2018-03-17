@@ -20,6 +20,16 @@ namespace Blog.Core.Utils.Infrastructure
         
         public string PageAction { get; set; }
         
+        public string PageClass { get; set; }
+        
+        public string PageClassNormal { get; set; }
+        
+        public string PageClassSelected { get; set; }
+        
+        public string PageLinkClass { get; set; }
+        
+        public string PageListClass { get; set; }
+        
         public PageLinkTagHelper(IUrlHelperFactory urlHelperFactory)
         {
             _urlHelperFactory = urlHelperFactory;
@@ -28,16 +38,29 @@ namespace Blog.Core.Utils.Infrastructure
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             var urlHelper = _urlHelperFactory.GetUrlHelper(ViewContext);
-            var result = new TagBuilder("div");
+            var result = new TagBuilder("nav");
+            var list = new TagBuilder("ul");
+            list.AddCssClass(PageListClass);
 
             for (var i = 1; i <= Paginator.PageCount; i++)
             {
-                var tag = new TagBuilder("a");
-                tag.Attributes["href"] = urlHelper.Action(PageAction, new {page = i});
-                tag.InnerHtml.Append(i.ToString());
-                result.InnerHtml.AppendHtml(tag);
+                var tag = new TagBuilder("li");
+                tag.AddCssClass(PageClass);
+                
+                var a = new TagBuilder("a");
+                a.Attributes["href"] = urlHelper.Action(PageAction, new {page = i});
+                a.AddCssClass(PageLinkClass);
+                
+                tag.AddCssClass(i == Paginator.PageNumber
+                                         ? PageClassSelected
+                                         : PageClassNormal);
+                
+                a.InnerHtml.Append(i.ToString());
+                tag.InnerHtml.AppendHtml(a);
+                list.InnerHtml.AppendHtml(tag);
             }
 
+            result.InnerHtml.AppendHtml(list);
             output.Content.AppendHtml(result.InnerHtml);
         }
     }
