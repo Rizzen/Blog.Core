@@ -61,7 +61,7 @@ namespace Blog.Core
             
             app.UseMvc(routes => {
                 routes.MapRoute(name: "pagination",
-                                template: "Home/Index{page}",
+                                template: "Home/Page{page}",
                                 defaults: new {Controller = "Home", action = "Index" });
                 routes.MapRoute(name: "default", 
                                 template: "{controller=Home}/{action=Index}");
