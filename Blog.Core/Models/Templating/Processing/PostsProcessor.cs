@@ -20,15 +20,14 @@ namespace Blog.Core.Models.Templating.Processing
             _engine = engine;
         }
 
-        public List<Post> ProcessMetadata(IEnumerable<Post> input)
+        public async Task<List<Post>> ProcessMetadata(IEnumerable<Post> input)
         {
-            return input.Select(ProcessMetadata)
-                        .ToList();
+            return (await Task.WhenAll(input.Select(ProcessMetadata))).ToList();
         }
         
-        public Post ProcessMetadata(Post input)
+        public async Task<Post> ProcessMetadata(Post input)
         {
-            var header = _postStore.GetContentByFilename(input.Filename).YamlHeader();
+            var header = (await _postStore.GetContentByFilename(input.Filename)).YamlHeader();
             
             input.Tags = header["tags"] as List<string>;
             input.Title = header["title"] as string;

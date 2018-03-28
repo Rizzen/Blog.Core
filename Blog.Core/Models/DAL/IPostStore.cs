@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Blog.Core.Models.DAL
 {
     public interface IPostStore
     {
         List<Post> Posts { get; }
-        string GetContentByFilename(string name);
-        List<string> GetContentByFilename(IEnumerable<string> names);
+        Task<string> GetContentByFilename(string name);
     }
 }

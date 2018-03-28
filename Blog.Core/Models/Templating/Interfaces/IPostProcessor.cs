@@ -6,8 +6,8 @@ namespace Blog.Core.Models.Templating.Interfaces
 {
     public interface IPostsProcessor
     {
-        List<Post> ProcessMetadata(IEnumerable<Post> input);
-        Post ProcessMetadata(Post input);
+        Task<List<Post>> ProcessMetadata(IEnumerable<Post> input);
+        Task<Post> ProcessMetadata(Post input);
         Task<List<Post>> ProcessTemplatesAsync(IEnumerable<Post> input, IPageContext pageContext);
         Task<Post> ProcessTemplateAsync(Post input, IPageContext pageContext);
     }

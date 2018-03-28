@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Blog.Core.Models;
 using Blog.Core.Models.DAL;
 using Blog.Core.Models.Templating.Interfaces;
@@ -38,7 +39,7 @@ namespace Blog.Core.Tests
                 
             var processor = new Mock<IPostsProcessor>();
             processor.Setup(x => x.ProcessMetadata(It.IsAny<IEnumerable<Post>>()))
-                     .Returns((List<Post> val) => val);
+                     .Returns((Task<List<Post>> val) => val);
             
             var cache = new ConcurrentCache<Post>(cachedPosts);
 

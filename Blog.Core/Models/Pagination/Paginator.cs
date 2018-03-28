@@ -14,9 +14,9 @@ namespace Blog.Core.Models.Pagination
         
         private readonly List<Post> _posts;
 
-        public int PageNumber { get; set; }
+        public int PageNumber { get;}
         
-        public int PageCount { get; set; }
+        public int PageCount { get; }
         
         public List<Post> Posts => _posts.Any(x => x.Content.IsNullOrEmpty())
                                                 ? _facade.GenRenderedPosts(_posts, _pageContext).Result.ToList()

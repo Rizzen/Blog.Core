@@ -24,7 +24,7 @@ namespace Blog.Core.Models.Templating.Processing
             CheckAndUpdate();
         }
 
-        public void CheckAndUpdate()
+        public async void CheckAndUpdate()
         {
             var currentPosts = _postStore.Posts;
             var cached = _cache.Get();
@@ -32,7 +32,7 @@ namespace Blog.Core.Models.Templating.Processing
             var delta = CalculateDelta(cached, currentPosts);
 
             _cache.Remove(delta.Item1);
-            var toadd = _postsProcessor.ProcessMetadata(delta.Item2);
+            var toadd = await _postsProcessor.ProcessMetadata(delta.Item2);
             _cache.Store(toadd);
         }
 

@@ -24,7 +24,7 @@ namespace Blog.Core.Models.Templating
         
         public async Task<List<Post>> GenRenderedPosts(IEnumerable<Post> input, IPageContext model)
         {
-            var toProcess = GetPostContent(input.ToList());
+            var toProcess = await GetPostContent(input.ToList());
             
             return await _postsProcessor.ProcessTemplatesAsync(toProcess, model);
         }
@@ -32,11 +32,11 @@ namespace Blog.Core.Models.Templating
         public List<Post> GetAllPostsMetadataOnly() => _cache.Posts;
 
         
-        private List<Post> GetPostContent(IList<Post> input)
+        private async Task<List<Post>> GetPostContent(IList<Post> input)
         {
             foreach (var post in input)
             {
-                post.Content = _postStore.GetContentByFilename(post.Filename).ExcludeHeader();
+                post.Content = (await _postStore.GetContentByFilename(post.Filename)).ExcludeHeader();
             }
 
             return input.ToList();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Blog.Core.Models.Settings;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
@@ -30,25 +31,19 @@ namespace Blog.Core.Models.DAL
                                      .Select(p => new Post {Filename = p})
                                      .ToList();
         }
-
-        public List<string> GetContentByFilename(IEnumerable<string> names)
-        {
-            return names.Select(GetContentByFilename)
-                        .ToList();
-        }
         
-        public string GetContentByFilename(string name)
+        public async Task<string> GetContentByFilename(string name)
         {
             var fullPath = name.Replace("~", _path);
             string result;
             
             try
             {
-                result = File.ReadAllText(fullPath);
+                result = await File.ReadAllTextAsync(fullPath);
             }
             catch (Exception e)
             {
-                result = $"Content removed or unaccessible. Exception is: {e.Message}";
+                result = await Task.FromResult($"Content removed or unaccessible. Exception is: {e.Message}");
             }
 
             return result;
