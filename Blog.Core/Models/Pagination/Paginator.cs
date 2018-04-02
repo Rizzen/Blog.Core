@@ -25,11 +25,12 @@ namespace Blog.Core.Models.Pagination
         public Paginator(IPostFacade facade, IPageContext pageContext, int pageNum, int postsPerPage)
         {
             _pageContext = pageContext;
-            PageNumber = pageNum;
+            _facade = facade;
+            
             var pages = (double) _pageContext.Blog.Posts.Count / postsPerPage;
             PageCount = (int) Math.Ceiling(pages);
+            PageNumber = pageNum;
             
-            _facade = facade;
             _posts = _pageContext.Blog.Posts.Skip((PageNumber - 1) * postsPerPage)
                                             .Take(postsPerPage)
                                             .ToList();

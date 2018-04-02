@@ -22,24 +22,24 @@ namespace Blog.Core.Models.Templating
             _cache = cache;
         }
         
-        public async Task<List<Post>> GenRenderedPosts(IEnumerable<Post> input, IPageContext model)
-        {
-            var toProcess = await GetPostContent(input.ToList());
-            
-            return await _postsProcessor.ProcessTemplatesAsync(toProcess, model);
-        }
-        
         public List<Post> GetAllPostsMetadataOnly() => _cache.Posts;
-
         
-        private async Task<List<Post>> GetPostContent(IList<Post> input)
+        public async Task<List<Post>> GenRenderedPosts(IList<Post> input, IPageContext model)
         {
-            foreach (var post in input)
-            {
-                post.Content = (await _postStore.GetContentByFilename(post.Filename)).ExcludeHeader();
-            }
-
+            await input.ForEachAsync(x => GetRenderedPost(x, model));
             return input.ToList();
+        }
+
+        private async Task<Post> GetRenderedPost(Post input, IPageContext model)
+        {
+            var toProcess = await GetPostContent(input);
+            return await _postsProcessor.ProcessTemplateAsync(toProcess, model);
+        }
+
+        private async Task<Post> GetPostContent(Post input)
+        {
+            input.Content = (await _postStore.GetContentByFilename(input.Filename)).ExcludeHeader();
+            return input;
         }
     }
 }

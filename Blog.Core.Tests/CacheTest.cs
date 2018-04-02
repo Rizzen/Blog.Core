@@ -170,5 +170,7 @@ namespace Blog.Core.Tests
             //Assert
             Assert.AreEqual(postCache.Posts.Count, cachedPosts.Count);
         }
+        
+        //TODO Few thread tests
     }
 }
