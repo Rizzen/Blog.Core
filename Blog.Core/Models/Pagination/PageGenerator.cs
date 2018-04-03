@@ -20,12 +20,17 @@ namespace Blog.Core.Models.Pagination
             _postsPerPage = siteSettings.Value.PostsPerPage;
         }
 
-        public PageContext GetContextForPage(int pageNum)
+        public IPageContext GetContextForPage(int pageNum)
         {
             return new PageContext(_blogContext, _facade, pageNum, _postsPerPage);
         }
 
-        public PageContext GetMetadataOnlyContext()
+        public IPageContext GetSinglePostPageContext(string postName)
+        {
+            return new PageContext(_blogContext, _facade, postName);
+        }
+
+        public IPageContext GetMetadataOnlyContext()
         {
             return new PageContext(_blogContext);
         }

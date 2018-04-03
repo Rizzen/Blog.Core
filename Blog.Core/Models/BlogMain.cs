@@ -1,5 +1,4 @@
-﻿using Blog.Core.Models.Contexts;
-using Blog.Core.Models.Interfaces;
+﻿using Blog.Core.Models.Interfaces;
 
 namespace Blog.Core.Models
 {
@@ -12,12 +11,17 @@ namespace Blog.Core.Models
             _pageGenerator = pageGenerator;
         }
 
-        public PageContext GetPostFeed(int page=1)
+        public IPageContext GetPostFeed(int page = 1)
         {
             return _pageGenerator.GetContextForPage(page);
         }
 
-        public PageContext GetBlogContent()
+        public IPageContext GetSinglePostPage(string postName)
+        {
+            return _pageGenerator.GetSinglePostPageContext(postName);
+        }
+        
+        public IPageContext GetBlogContent()
         {
             return _pageGenerator.GetMetadataOnlyContext();
         }

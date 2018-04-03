@@ -7,7 +7,7 @@ using Blog.Core.Models.Templating.Interfaces;
 
 namespace Blog.Core.Models.Pagination
 {
-    public class Paginator
+    public class Paginator: IPaginator
     {
         private readonly IPostFacade _facade;
         private readonly IPageContext _pageContext;

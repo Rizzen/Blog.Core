@@ -4,7 +4,7 @@ namespace Blog.Core.Models.Interfaces
 {
     public interface IPageContext
     {
-        Paginator Paginator { get; }
+        IPaginator Paginator { get; }
         IBlogContext Blog { get; }
     }
 }

@@ -1,14 +1,34 @@
-﻿@model Blog.Core.Models.Contexts.PageContext
-
+﻿@model Blog.Core.Models.Interfaces.IPageContext
+@inject Microsoft.Extensions.Options.IOptionsMonitor<SiteSettings> SiteSettings;
+@{ 
+    Layout = "_Layout";
+}
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title>title</title>
 </head>
 <body>
 <div>
-      
+    <div class="container">
+        <div class="row">
+            @{
+                var post = Model.Paginator.Posts.Single();
+                <span class="blog-post-meta">
+                    <h2 class="blog-post-title">@post.Title</h2>
+                    <b>Теги:</b>
+                    @foreach (var tag in post.Tags)
+                    {
+                        <span class="badge badge-secondary">@tag</span>
+                    }
+                </span>
+                <br/>
+                <div class="blog-post-list-item">
+                    @Html.Raw(post.Content)
+                </div>
+            }
+        </div>
+    </div>
 </div>
 </body>
 </html>

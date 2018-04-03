@@ -1,10 +1,15 @@
 ﻿@inject Microsoft.Extensions.Options.IOptionsMonitor<SiteSettings> SiteSettings
-
+@{
+    ViewData["Title"] = $"Blog {SiteSettings.CurrentValue.Author}";
+    ViewData["Description"] = SiteSettings.CurrentValue.Description;
+    ViewBag.PageId = "about";
+}
 <html>
 <head>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/blog.css"/>
     <link rel="stylesheet" href="/css/layout.css"/>
+    <title>@ViewData["Title"]</title>
 </head>
 <body>
 @Html.Partial("_navBar")

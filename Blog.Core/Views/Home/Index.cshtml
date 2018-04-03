@@ -1,17 +1,11 @@
-﻿@inject Microsoft.Extensions.Options.IOptionsMonitor<SiteSettings> SiteSettings;
-@using Blog.Core.Models.Contexts
-@model Blog.Core.Models.Interfaces.IPageContext
+﻿@model Blog.Core.Models.Interfaces.IPageContext
 @{
-    ViewData["Title"] = $"Blog {SiteSettings.CurrentValue.Author}";
-    ViewData["Description"] = SiteSettings.CurrentValue.Description;
-    ViewBag.PageId = "about";
     Layout = "_Layout";
 }
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title>@ViewData["Title"]</title>
 </head>
 <body>
 
@@ -24,7 +18,6 @@
             @Html.Partial("_tagList", Model)
         </div>
     </div>
-    
 </div>
 </body>
 </html>

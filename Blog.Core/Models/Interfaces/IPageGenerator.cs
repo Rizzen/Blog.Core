@@ -4,7 +4,8 @@ namespace Blog.Core.Models.Interfaces
 {
     public interface IPageGenerator
     {
-        PageContext GetContextForPage(int pageNum);
-        PageContext GetMetadataOnlyContext();
+        IPageContext GetContextForPage(int pageNum);
+        IPageContext GetSinglePostPageContext(string postName);
+        IPageContext GetMetadataOnlyContext();
     }
 }

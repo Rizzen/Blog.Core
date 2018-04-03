@@ -1,4 +1,5 @@
-﻿using Blog.Core.Models.Pagination;
+﻿using Blog.Core.Models.Interfaces;
+using Blog.Core.Models.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -16,7 +17,7 @@ namespace Blog.Core.Utils.Infrastructure
         [HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
         
-        public Paginator Paginator { get; set; }
+        public IPaginator Paginator { get; set; }
         
         public string PageAction { get; set; }
         

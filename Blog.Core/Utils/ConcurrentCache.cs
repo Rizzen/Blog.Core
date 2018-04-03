@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Blog.Core.Utils
 {
-    //Some kind of HashSet
+    // Some kind of HashSet
     public class ConcurrentCache<T>: ICache<T>
     {
         private readonly ConcurrentDictionary<T, byte> _bag;

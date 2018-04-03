@@ -18,5 +18,11 @@ namespace Blog.Core.Controllers
             return View(_blog.GetPostFeed(page));
         }
 
+        [HttpGet]
+        public string SinglePostPage(string postName)
+        {
+            // var a = View
+            return "hello";
+        }
     }
 }

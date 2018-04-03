@@ -24,14 +24,6 @@ namespace Blog.Core.Models.DAL
             _siteSettings = siteSettings.Value;
         }
         
-        private List<Post> GetAllPostsWithNames()
-        {
-            return Directory.GetFiles(_path, "*.cshtml", SearchOption.AllDirectories)
-                                     .Select(p => p.Replace(_path, "~"))
-                                     .Select(p => new Post {Filename = p})
-                                     .ToList();
-        }
-        
         public async Task<string> GetContentByFilename(string name)
         {
             var fullPath = name.Replace("~", _path);
@@ -47,6 +39,14 @@ namespace Blog.Core.Models.DAL
             }
 
             return result;
+        }
+        
+        private List<Post> GetAllPostsWithNames()
+        {
+            return Directory.GetFiles(_path, "*.cshtml", SearchOption.AllDirectories)
+                                      .Select(p => p.Replace(_path, "~"))
+                                      .Select(p => new Post {Filename = p})
+                                      .ToList();
         }
     }
 }
