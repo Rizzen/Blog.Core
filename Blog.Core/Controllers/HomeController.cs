@@ -19,10 +19,9 @@ namespace Blog.Core.Controllers
         }
 
         [HttpGet]
-        public string SinglePostPage(string postName)
+        public ViewResult SinglePostPage(string postName)
         {
-            // var a = View
-            return "hello";
+            return View("SinglePost", _blog.GetSinglePostPage(postName));
         }
     }
 }

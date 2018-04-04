@@ -1,9 +1,12 @@
-﻿@model Blog.Core.Models.Interfaces.IPageContext 
+﻿@using Microsoft.AspNetCore.Mvc
+@model Blog.Core.Models.Interfaces.IPageContext 
 
 @foreach (var post in Model.Paginator.Posts)
 {
     <span class="blog-post-meta">
-        <h2 class="blog-post-title">@post.Title</h2>
+        <a asp-controller="Home" asp-action="SinglePostPage" asp-route-postName="@post.Filename">
+            <h2 class="blog-post-title">@post.Title</h2> 
+        </a>
         <b>Теги:</b>
         @foreach (var tag in post.Tags)
         {

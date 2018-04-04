@@ -16,7 +16,7 @@ namespace Blog.Core.Models.DAL
         
         public List<Post> Posts => GetAllPostsWithNames();
 
-        private string _path => $"{_hostingEnvironment.ContentRootPath}{_siteSettings.PostsFolderPath}";
+        private string _path => $"{_hostingEnvironment.ContentRootPath}{_siteSettings.PostsFolderPath}/";
         
         public PostStore(IHostingEnvironment hostingEnvironment, IOptions<SiteSettings> siteSettings)
         {
@@ -26,7 +26,7 @@ namespace Blog.Core.Models.DAL
         
         public async Task<string> GetContentByFilename(string name)
         {
-            var fullPath = name.Replace("~", _path);
+            var fullPath = $"{_path}{name}.cshtml";
             string result;
             
             try
@@ -44,9 +44,9 @@ namespace Blog.Core.Models.DAL
         private List<Post> GetAllPostsWithNames()
         {
             return Directory.GetFiles(_path, "*.cshtml", SearchOption.AllDirectories)
-                                      .Select(p => p.Replace(_path, "~"))
-                                      .Select(p => new Post {Filename = p})
-                                      .ToList();
+                            .Select(p => p.Replace(_path, string.Empty).Replace(".cshtml", string.Empty))
+                            .Select(p => new Post {Filename = p})
+                            .ToList();
         }
     }
 }

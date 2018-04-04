@@ -1,22 +1,27 @@
 ﻿@inject Microsoft.Extensions.Options.IOptionsMonitor<SiteSettings> SiteSettings;
 @model Blog.Core.Models.Interfaces.IPageContext
 @{
-    ViewData["Title"] = $"Content of {SiteSettings.CurrentValue.Author}";
-    ViewData["Description"] = SiteSettings.CurrentValue.Description;
-    ViewBag.PageId = "about";
     Layout = "_Layout";
 }
 
 <html>
 <head>
-    <title>@ViewData["Title"]</title>
 </head>
 
 <body>
-
 <div class="container">
-    <h2>List of Posts</h2>
+    <h2>Content</h2>
+    <ul>
+        @{
+            foreach (var blogPost in Model.Blog.Posts)
+            {
+                <a asp-controller="Home" asp-action="SinglePostPage" asp-route-postName="@blogPost.Filename">
+                    <li>@blogPost.Title</li>
+                </a>
+            }
+        }
+    </ul>
+    
 </div>
-
 </body>
 </html>
