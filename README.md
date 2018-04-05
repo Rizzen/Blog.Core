@@ -2,7 +2,7 @@
 # Blog.Core
 My simple ASP.NET Core blog engine workbench.
 
-# Example
+## Example
 Almost actual version deployed here - <a href="kilooscartango.azurewebsites.net">Blog</a>
 
 ## Technologies and Tools Used
