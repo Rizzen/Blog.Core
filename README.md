@@ -2,6 +2,9 @@
 # Blog.Core
 My simple ASP.NET Core blog engine workbench.
 
+# Example
+Almost actual version deployed here - <a href="kilooscartango.azurewebsites.net">Blog</a>
+
 ## Technologies and Tools Used
 - <a href="https://docs.microsoft.com/en-us/aspnet">ASP.NET Core </a> framework
 - <a href="https://github.com/aaubry/YamlDotNet">YamlDotNet</a> library 
