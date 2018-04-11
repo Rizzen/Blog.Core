@@ -6,7 +6,14 @@
         <a asp-controller="Home" asp-action="SinglePostPage" asp-route-postName="@post.Filename">
             <h2 class="blog-post-title">@post.Title</h2> 
         </a>
-        <b>Теги:</b>
+        @{
+            if (post.DateTime.HasValue)
+            {
+                <b>Date:</b>
+                @post.DateTime.Value.ToString("yyyy-MM-dd")
+            }
+        }
+        <b>Tags:</b>
         @foreach (var tag in post.Tags)
         {
             <a asp-controller="Home" asp-action="PostsWithTagPage" asp-route-tag="@tag.ResolutionName">

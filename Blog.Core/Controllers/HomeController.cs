@@ -36,7 +36,8 @@ namespace Blog.Core.Controllers
         
         private ViewResult FilteredPostPage(Func<IEnumerable<Post>, IEnumerable<Post>> filter)
         {
-            if (filter == null) throw new ArgumentNullException(nameof(filter));
+            if (filter == null)
+                throw new ArgumentNullException(nameof(filter));
             return View("Index", _blog.GetFilteredPostPage(filter));
         }
     }

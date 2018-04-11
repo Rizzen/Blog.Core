@@ -26,7 +26,7 @@ namespace Blog.Core.Models.Pagination
         {
             _pageContext = pageContext;
             _facade = facade;
-            _post = filter(_pageContext.Blog.Posts).ToList(); 
+            _post = filter(_pageContext.Blog.Posts).OrderByDescending(x => x.DateTime).ToList(); 
         }
     }
 }

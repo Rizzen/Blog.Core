@@ -21,7 +21,7 @@ namespace Blog.Core.Models
         
         /// <summary>Publishing time</summary>
         /// <remarks>Metadata</remarks>
-        public DateTime DateTime { get; set; }
+        public DateTime? DateTime { get; set; }
         
         /// <summary>Content</summary>
         public string Content { get; set; } 

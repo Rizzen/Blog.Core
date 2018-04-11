@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Blog.Core.Extensions;
@@ -31,7 +33,8 @@ namespace Blog.Core.Models.Templating.Processing
             
             input.Tags = ProcessTags(header["tags"] as List<string>);
             input.Title = header["title"] as string;
-
+            input.DateTime = ProcessDateTime(header["date"] as string);
+            
             return input;
         }
         
@@ -48,5 +51,12 @@ namespace Blog.Core.Models.Templating.Processing
         }
 
         private List<Tag> ProcessTags(IEnumerable<string> tags) => tags.Select(x => new Tag(x)).ToList();
+
+        private DateTime? ProcessDateTime(string dateString)
+        {
+            if (DateTime.TryParse(dateString, out var dateTime))
+                return dateTime;
+            return null;
+        }
     }
 }
