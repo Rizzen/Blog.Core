@@ -1,4 +1,8 @@
-﻿using Blog.Core.Models.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Blog.Core.Models;
+using Blog.Core.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Core.Controllers
@@ -21,7 +25,19 @@ namespace Blog.Core.Controllers
         [HttpGet]
         public ViewResult SinglePostPage(string postName)
         {
-            return View("SinglePost", _blog.GetSinglePostPage(postName));
+            return FilteredPostPage(x => x.Where(p => p.Filename == postName));
+        }
+        
+        [HttpGet]
+        public ViewResult PostsWithTagPage(string tag)
+        {
+            return FilteredPostPage(x => x.Where(p => p.Tags.Any(t => t.ResolutionName == tag)));
+        }
+        
+        private ViewResult FilteredPostPage(Func<IEnumerable<Post>, IEnumerable<Post>> filter)
+        {
+            if (filter == null) throw new ArgumentNullException(nameof(filter));
+            return View("Index", _blog.GetFilteredPostPage(filter));
         }
     }
 }

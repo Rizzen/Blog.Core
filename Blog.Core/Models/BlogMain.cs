@@ -1,4 +1,6 @@
-﻿using Blog.Core.Models.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using Blog.Core.Models.Interfaces;
 
 namespace Blog.Core.Models
 {
@@ -16,9 +18,9 @@ namespace Blog.Core.Models
             return _pageGenerator.GetContextForPage(page);
         }
 
-        public IPageContext GetSinglePostPage(string postName)
+        public IPageContext GetFilteredPostPage(Func<IEnumerable<Post>, IEnumerable<Post>> filter)
         {
-            return _pageGenerator.GetSinglePostPageContext(postName);
+            return _pageGenerator.GetFilteredPostPageContext(filter);
         }
         
         public IPageContext GetBlogContent()

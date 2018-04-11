@@ -1,4 +1,6 @@
-﻿using Blog.Core.Models.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Pagination;
 using Blog.Core.Models.Templating.Interfaces;
 
@@ -19,9 +21,11 @@ namespace Blog.Core.Models.Contexts
             Paginator = new Paginator(facade, this, pageNum, postsPerPage);
         }
 
-        public PageContext(IBlogContext blog, IPostFacade facade, string postName) : this(blog)
+        public PageContext(IBlogContext blog,
+                           IPostFacade facade,
+                           Func<IEnumerable<Post>, IEnumerable<Post>> filter) : this(blog)
         {
-            Paginator = new SinglePagePaginator(facade, this, postName);
+            Paginator = new FilteredPostsPaginator(facade, this, filter);
         }
     }
 }

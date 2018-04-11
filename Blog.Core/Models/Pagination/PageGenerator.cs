@@ -1,4 +1,6 @@
-﻿using Blog.Core.Models.Contexts;
+﻿using System;
+using System.Collections.Generic;
+using Blog.Core.Models.Contexts;
 using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Settings;
 using Blog.Core.Models.Templating.Interfaces;
@@ -25,9 +27,9 @@ namespace Blog.Core.Models.Pagination
             return new PageContext(_blogContext, _facade, pageNum, _postsPerPage);
         }
 
-        public IPageContext GetSinglePostPageContext(string postName)
+        public IPageContext GetFilteredPostPageContext(Func<IEnumerable<Post>, IEnumerable<Post>> filter)
         {
-            return new PageContext(_blogContext, _facade, postName);
+            return new PageContext(_blogContext, _facade, filter);
         }
 
         public IPageContext GetMetadataOnlyContext()

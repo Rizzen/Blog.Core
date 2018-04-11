@@ -1,4 +1,6 @@
-﻿using Blog.Core.Models.Contexts;
+﻿using System;
+using System.Collections.Generic;
+using Blog.Core.Models.Contexts;
 
 namespace Blog.Core.Models.Interfaces
 {
@@ -6,6 +8,6 @@ namespace Blog.Core.Models.Interfaces
     {
         IPageContext GetPostFeed(int page);
         IPageContext GetBlogContent();
-        IPageContext GetSinglePostPage(string postName);
+        IPageContext GetFilteredPostPage(Func<IEnumerable<Post>, IEnumerable<Post>> filter);
     }
 }

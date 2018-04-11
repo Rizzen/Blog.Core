@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Blog.Core.Models.Templating.Processing;
 
 namespace Blog.Core.Models
 {
@@ -16,7 +17,7 @@ namespace Blog.Core.Models
         
         /// <summary>Tags</summary>
         /// <remarks>Metadata</remarks>
-        public List<string> Tags { get; set; }
+        public List<Tag> Tags { get; set; }
         
         /// <summary>Publishing time</summary>
         /// <remarks>Metadata</remarks>

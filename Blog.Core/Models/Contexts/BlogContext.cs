@@ -3,6 +3,7 @@ using System.Linq;
 using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Settings;
 using Blog.Core.Models.Templating.Interfaces;
+using Blog.Core.Models.Templating.Processing;
 using Microsoft.Extensions.Options;
 
 namespace Blog.Core.Models.Contexts
@@ -15,7 +16,7 @@ namespace Blog.Core.Models.Contexts
 
         public List<Post> Posts => _facade.GetAllPostsMetadataOnly();
        
-        public List<string> Tags => Posts.SelectMany(x => x.Tags)
+        public List<Tag> Tags => Posts.SelectMany(x => x.Tags)
                                          .Distinct()
                                          .ToList();
         

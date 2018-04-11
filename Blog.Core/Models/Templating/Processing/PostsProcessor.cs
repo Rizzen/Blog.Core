@@ -29,7 +29,7 @@ namespace Blog.Core.Models.Templating.Processing
         {
             var header = (await _postStore.GetContentByFilename(input.Filename)).YamlHeader();
             
-            input.Tags = header["tags"] as List<string>;
+            input.Tags = ProcessTags(header["tags"] as List<string>);
             input.Title = header["title"] as string;
 
             return input;
@@ -46,5 +46,7 @@ namespace Blog.Core.Models.Templating.Processing
             input.Content = await _engine.ProcessTemplateAsync(input.Filename, input.Content, pageContext);
             return input;
         }
+
+        private List<Tag> ProcessTags(IEnumerable<string> tags) => tags.Select(x => new Tag(x)).ToList();
     }
 }

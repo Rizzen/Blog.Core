@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Mvc
-@model Blog.Core.Models.Interfaces.IPageContext 
+﻿@model Blog.Core.Models.Interfaces.IPageContext 
 
 @foreach (var post in Model.Paginator.Posts)
 {
@@ -10,9 +9,12 @@
         <b>Теги:</b>
         @foreach (var tag in post.Tags)
         {
-            <span class="badge badge-secondary">@tag</span>
+            <a asp-controller="Home" asp-action="PostsWithTagPage" asp-route-tag="@tag.ResolutionName">
+                <span class="badge badge-secondary">@tag.Name</span>
+            </a>
         }
-    </span> <br/>
+    </span>
+    <br/>
     <div class="blog-post-list-item">
         @Html.Raw(post.Content)
     </div>

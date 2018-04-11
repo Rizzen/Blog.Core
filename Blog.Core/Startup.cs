@@ -68,6 +68,10 @@ namespace Blog.Core
                                 template: "Home/Page/{page}",
                                 defaults: new {Controller = "Home", action = "Index"});
                 
+                routes.MapRoute(name: "tags",
+                                template: "Posts/tag/{tag}",
+                                defaults: new {Controller = "Home", action = "PostsWithTagPage"});
+                
                 routes.MapRoute(name: "default", 
                                 template: "{controller=Home}/{action=Index}");
                 
