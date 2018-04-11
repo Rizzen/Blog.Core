@@ -1,6 +1,6 @@
 ![Build status](https://ci.appveyor.com/api/projects/status/gfhe41llpm74wgg8/branch/master?svg=true)
 # Blog.Core
-My simple ASP.NET Core blog engine workbench.
+My simple ASP.NET Core blog engine.
 
 [![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)
 
