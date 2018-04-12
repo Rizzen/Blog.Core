@@ -31,8 +31,8 @@ namespace Blog.Core.Models.Pagination
             PageCount = (int) Math.Ceiling(pages);
             PageNumber = pageNum;
             
-            _posts = _pageContext.Blog.Posts.Skip((PageNumber - 1) * postsPerPage)
-                                            .OrderByDescending(x => x.DateTime)
+            _posts = _pageContext.Blog.Posts.OrderByDescending(x => x.DateTime)
+                                            .Skip((PageNumber - 1) * postsPerPage)
                                             .Take(postsPerPage)
                                             .ToList();
         }
