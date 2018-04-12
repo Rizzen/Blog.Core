@@ -17,7 +17,7 @@
         @foreach (var tag in post.Tags)
         {
             <a asp-controller="Home" asp-action="PostsWithTagPage" asp-route-tag="@tag.ResolutionName">
-                <span class="badge badge-pill badge-info">@tag.Name</span></a>
+                <span class="badge badge-secondary">@tag.Name</span></a>
         }
     </span>
     <br/>
