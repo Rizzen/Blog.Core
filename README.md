@@ -1,6 +1,8 @@
 ![Build status](https://ci.appveyor.com/api/projects/status/gfhe41llpm74wgg8/branch/master?svg=true)
 
-![Status Aquana][status-aquana]][andivionian-status-classifier]
+[![Status Umbra][status-umbra]][andivionian-status-classifier]
+[andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-umbra-
+[status-umbra]: https://img.shields.io/badge/status-umbra-red.svg
 # Blog.Core
 My simple ASP.NET Core blog engine.
 
