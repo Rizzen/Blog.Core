@@ -8,12 +8,12 @@ namespace Blog.Core.Extensions
 {
     public static class YamlExtensions
     {
-        private static readonly Regex regex = new Regex(@"(?s:^---(.*?)---)");
+        private static readonly Regex Regex = new Regex(@"(?s:^---(.*?)---)");
         
         
         public static IDictionary<string, object> YamlHeader(this string text)
         {
-            var m = regex.Matches(text);
+            var m = Regex.Matches(text);
             if (m.Count == 0)
             {
                 return new Dictionary<string, object>();
@@ -49,7 +49,7 @@ namespace Blog.Core.Extensions
         
         public static string ExcludeHeader(this string text)
         {
-            var m = regex.Matches(text);
+            var m = Regex.Matches(text);
             if (m.Count == 0)
                 return text;
 

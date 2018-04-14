@@ -1,5 +1,4 @@
 ﻿using Blog.Core.Models.Interfaces;
-using Blog.Core.Models.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;

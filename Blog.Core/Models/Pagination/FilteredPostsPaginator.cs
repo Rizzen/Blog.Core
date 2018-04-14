@@ -9,8 +9,8 @@ namespace Blog.Core.Models.Pagination
 {
     public class FilteredPostsPaginator: IPaginator
     {
-        public int PageNumber { get; }
-        public int PageCount { get; }
+        public int PageNumber { get; } = 0;
+        public int PageCount { get; } = 0;
         
         private readonly IPostFacade _facade;
         private readonly IPageContext _pageContext;

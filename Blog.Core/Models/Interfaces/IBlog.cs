@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Blog.Core.Models.Contexts;
 
 namespace Blog.Core.Models.Interfaces
 {

@@ -7,7 +7,7 @@ using Blog.Core.Utils;
 
 namespace Blog.Core.Models.Templating.Processing
 {
-    public class PostCache: IDisposable
+    public class PostCache
     {
         private readonly ICache<Post> _cache;
         private readonly IPostStore _postStore;
@@ -53,11 +53,6 @@ namespace Blog.Core.Models.Templating.Processing
                         : new List<Post>();
             
             return (toRemove, toAdd);
-        }
-
-        public void Dispose()
-        {
-            Console.WriteLine("Disposed");
         }
     }
 }

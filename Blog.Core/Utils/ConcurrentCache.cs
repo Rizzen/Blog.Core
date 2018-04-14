@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,7 +13,7 @@ namespace Blog.Core.Utils
         public ConcurrentCache(IEnumerable<T> initial)
         {
             _bag = new ConcurrentDictionary<T, byte>();
-            
+            Console.WriteLine("Created");
             if (initial != null)
             {
                 foreach (var init in initial)
@@ -45,7 +46,7 @@ namespace Blog.Core.Utils
             {
                 foreach (var item in items)
                 {
-                    _bag.TryRemove(item, out var value);
+                    _bag.TryRemove(item, out _);
                 }
             }
         }
