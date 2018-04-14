@@ -10,7 +10,7 @@ My simple ASP.NET Core blog engine.
 ## Build status
 ![Build status](https://ci.appveyor.com/api/projects/status/gfhe41llpm74wgg8/branch/master?svg=true)
 
-[![Build history](https://buildstats.info/appveyor/chart/Rizzen/blog-core?branch=master&includeBuildsFromPullRequest=false)]
+![Build history](https://buildstats.info/appveyor/chart/Rizzen/blog-core?branch=master&includeBuildsFromPullRequest=false)
 
 ## Example
 Almost actual version deployed here - <a href="http://kilooscartango.azurewebsites.net/">Blog</a>
