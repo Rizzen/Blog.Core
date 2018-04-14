@@ -4,6 +4,7 @@
 
 # Blog.Core
 My simple ASP.NET Core blog engine.
+
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
 ## Example
 Almost actual version deployed here - <a href="http://kilooscartango.azurewebsites.net/">Blog</a>
