@@ -1,6 +1,7 @@
 
 
 [![Status Ventis][status-ventis]][andivionian-status-classifier]
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 # Blog.Core
 My simple ASP.NET Core blog engine.
