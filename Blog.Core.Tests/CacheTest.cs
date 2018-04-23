@@ -65,7 +65,6 @@ namespace Blog.Core.Tests
             }
         }
         
-        
         [Test]
         public void CalcDeltaTest_WithoutDelta()
         {
@@ -170,7 +169,5 @@ namespace Blog.Core.Tests
             //Assert
             Assert.AreEqual(postCache.Posts.Count, cachedPosts.Count);
         }
-        
-        //TODO Few thread tests
     }
 }
