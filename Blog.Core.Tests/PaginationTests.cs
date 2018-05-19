@@ -20,7 +20,7 @@ namespace Blog.Core.Tests
         [Test]
         public void Can_Generate_Page_Links()
         {
-            //Arrange
+            // Arrange
             var posts = new List<Post>();
             for (var i = 0; i < 30; i++)
             {
@@ -60,13 +60,13 @@ namespace Blog.Core.Tests
                                              new TagHelperAttributeList(),
                                              (cache, encoder) => Task.FromResult(content.Object));
             
-            //Act
+            // Act
             helper.Process(ctx, output);
             
-            //Assert
-            Assert.AreEqual(@"<a href=""Test/Page1"">1</a>"
-                          + @"<a href=""Test/Page2"">2</a>"
-                          + @"<a href=""Test/Page3"">3</a>",
+            // Assert
+            Assert.AreEqual(@"<ul class=""""><li class="" ""><a class="""" href=""Test/Page1"">1</a></li>"
+                          + @"<li class="" ""><a class="""" href=""Test/Page2"">2</a></li>"
+                          + @"<li class="" ""><a class="""" href=""Test/Page3"">3</a></li></ul>",
                           output.Content.GetContent());
         }
     }

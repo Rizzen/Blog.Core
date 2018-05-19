@@ -39,18 +39,18 @@ namespace Blog.Core.Tests
                 
             var processor = new Mock<IPostsProcessor>();
             processor.Setup(x => x.ProcessMetadata(It.IsAny<IEnumerable<Post>>()))
-                     .Returns((Task<List<Post>> val) => val);
+                     .Returns((List<Post> val) => Task.FromResult(val));
             
             var cache = new ConcurrentCache<Post>(cachedPosts);
 
             var postCache = new PostCache(cache, dao.Object, processor.Object);
             
-            //Act
+            // Act
             postCache.CheckAndUpdate();
             
             postCache.Posts.ForEach(x => Console.WriteLine(x.Filename));
             
-            //Assert
+            // Assert
             var expectingResult = new List<Post>()
             {
                 new Post {Filename = "second"},
@@ -68,7 +68,7 @@ namespace Blog.Core.Tests
         [Test]
         public void CalcDeltaTest_WithoutDelta()
         {
-            //Arrange
+            // Arrange
             var postsInFilesystem = new List<Post>()
             {
                 new Post {Filename = "first"},
@@ -93,12 +93,12 @@ namespace Blog.Core.Tests
             var cache = new ConcurrentCache<Post>(cachedPosts);
             var postCache = new PostCache(cache, repository.Object, processor.Object);
             
-            //Act
+            // Act
             postCache.CheckAndUpdate();
             
             postCache.Posts.ForEach(x => Console.WriteLine(x.Filename));
             
-            //Assert
+            // Assert
             var expectingResult = new List<Post>
             {
                 new Post {Filename = "first"},
@@ -116,7 +116,7 @@ namespace Blog.Core.Tests
         [Test]
         public void CalcDeltaTest_WhenNoData()
         {
-            //Arrange
+            // Arrange
             var postsInFilesystem = new List<Post>();
 
             var cachedPosts = new List<Post>();
@@ -129,19 +129,19 @@ namespace Blog.Core.Tests
             var cache = new ConcurrentCache<Post>(cachedPosts);
             var postCache = new PostCache(cache, repository.Object, processor.Object);
             
-            //Act
+            // Act
             postCache.CheckAndUpdate();
             
             postCache.Posts.ForEach(x => Console.WriteLine(x.Filename));
             
-            //Assert
+            // Assert
             Assert.AreEqual(postCache.Posts.Count, 0);
         }
 
         [Test]
         public void CalcDeltaTest_WhenNull()
         {
-            //Arrange
+            // Arrange
             var postsInFilesystem = (List<Post>) null;
 
             var cachedPosts = new List<Post>()
@@ -161,12 +161,12 @@ namespace Blog.Core.Tests
             var cache = new ConcurrentCache<Post>(cachedPosts);
             var postCache = new PostCache(cache, repository.Object, processor.Object);
             
-            //Act
+            // Act
             postCache.CheckAndUpdate();
             
             postCache.Posts.ForEach(x => Console.WriteLine(x.Filename));
             
-            //Assert
+            // Assert
             Assert.AreEqual(postCache.Posts.Count, cachedPosts.Count);
         }
     }

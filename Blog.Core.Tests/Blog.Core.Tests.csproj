@@ -3,11 +3,13 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <Prefer32bit>false</Prefer32bit>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blog.Core\Blog.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="BenchmarkDotNet.Core" Version="0.10.12" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.0-preview-20180207-05" />
     <PackageReference Include="Moq" Version="4.8.1" />
