@@ -38,6 +38,11 @@ namespace Blog.Core.Tests
 
                 return false;
             }
+
+            public override int GetHashCode()
+            {
+                return Value;
+            }
         }
 
     }

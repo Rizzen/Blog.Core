@@ -7,6 +7,7 @@
     <ProjectReference Include="..\Blog.Core\Blog.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="BenchmarkDotNet.Core" Version="0.10.12" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.0-preview-20180207-05" />
     <PackageReference Include="Moq" Version="4.8.1" />
