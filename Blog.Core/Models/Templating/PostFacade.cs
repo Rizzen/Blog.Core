@@ -26,8 +26,7 @@ namespace Blog.Core.Models.Templating
         
         public async Task<List<Post>> GenRenderedPosts(IList<Post> input, IPageContext model)
         {
-            await input.ForEachAsync(x => GetRenderedPost(x, model));
-            return input.ToList();
+            return (await Task.WhenAll(input.Select(async x => await GetRenderedPost(x, model)))).ToList();
         }
 
         private async Task<Post> GetRenderedPost(Post input, IPageContext model)
@@ -38,8 +37,11 @@ namespace Blog.Core.Models.Templating
 
         private async Task<Post> GetPostContent(Post input)
         {
-            input.Content = (await _postStore.GetContentByFilename(input.Filename)).ExcludeHeader();
-            return input;
+            var result = new Post(input)
+            {
+                Content = (await _postStore.GetContentByFilename(input.Filename)).ExcludeHeader()
+            };
+            return result;
         }
     }
 }

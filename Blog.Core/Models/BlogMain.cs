@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Blog.Core.Models.Interfaces;
 
 namespace Blog.Core.Models
@@ -13,14 +14,14 @@ namespace Blog.Core.Models
             _pageGenerator = pageGenerator;
         }
 
-        public IPageContext GetPostFeed(int page = 1)
+        public async Task<IPageContext> GetPostFeed(int page = 1)
         {
-            return _pageGenerator.GetContextForPage(page);
+            return await _pageGenerator.GetContextForPage(page);
         }
 
-        public IPageContext GetFilteredPostPage(Func<IEnumerable<Post>, IEnumerable<Post>> filter)
+        public async Task<IPageContext> GetFilteredPostPage(Func<IEnumerable<Post>, IEnumerable<Post>> filter)
         {
-            return _pageGenerator.GetFilteredPostPageContext(filter);
+            return await _pageGenerator.GetFilteredPostPageContext(filter);
         }
         
         public IPageContext GetBlogContent()

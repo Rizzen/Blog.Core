@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using RazorLight;
 
 namespace Blog.Core
 {
@@ -11,7 +12,7 @@ namespace Blog.Core
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        private static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())

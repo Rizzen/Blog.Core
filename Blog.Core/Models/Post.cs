@@ -30,6 +30,17 @@ namespace Blog.Core.Models
         /// <remarks>Like "~/Views/_posts/example.cshtml"</remarks>
         public string Filename { get; set; }
 
+        public Post() { }
+        
+        public Post(Post post)
+        {
+            Title = post.Title;
+            Author = post.Title;
+            Tags = post.Tags;
+            DateTime = post.DateTime;
+            Filename = post.Filename;
+        }
+
         /// <summary>Determines whether the specified object is equal to the current object.</summary>
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns>true if the specified object  is equal to the current object; otherwise, false.</returns>

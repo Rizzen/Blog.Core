@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Blog.Core.Models.Interfaces
 {
     public interface IPageGenerator
     {
-        IPageContext GetContextForPage(int pageNum);
+        Task<IPageContext> GetContextForPage(int pageNum);
         IPageContext GetMetadataOnlyContext();
-        IPageContext GetFilteredPostPageContext(Func<IEnumerable<Post>, IEnumerable<Post>> filter);
+        Task<IPageContext> GetFilteredPostPageContext(Func<IEnumerable<Post>, IEnumerable<Post>> filter);
     }
 }

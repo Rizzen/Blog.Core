@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Blog.Core.Models.Interfaces
 {
     public interface IBlog
     {
-        IPageContext GetPostFeed(int page);
+        Task<IPageContext> GetPostFeed(int page);
         IPageContext GetBlogContent();
-        IPageContext GetFilteredPostPage(Func<IEnumerable<Post>, IEnumerable<Post>> filter);
+        Task<IPageContext> GetFilteredPostPage(Func<IEnumerable<Post>, IEnumerable<Post>> filter);
     }
 }

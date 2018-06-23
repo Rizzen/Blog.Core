@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Blog.Core.Models.Contexts;
 using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Settings;
@@ -22,14 +23,14 @@ namespace Blog.Core.Models.Pagination
             _postsPerPage = siteSettings.Value.PostsPerPage;
         }
 
-        public IPageContext GetContextForPage(int pageNum)
+        public async Task<IPageContext> GetContextForPage(int pageNum)
         {
-            return new PageContext(_blogContext, _facade, pageNum, _postsPerPage);
+            return await new PageContext(_blogContext, _facade, pageNum, _postsPerPage).InitializeAsync();
         }
 
-        public IPageContext GetFilteredPostPageContext(Func<IEnumerable<Post>, IEnumerable<Post>> filter)
+        public async Task<IPageContext> GetFilteredPostPageContext(Func<IEnumerable<Post>, IEnumerable<Post>> filter)
         {
-            return new PageContext(_blogContext, _facade, filter);
+            return await new PageContext(_blogContext, _facade, filter).InitializeAsync();
         }
 
         public IPageContext GetMetadataOnlyContext()
