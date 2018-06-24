@@ -3,7 +3,7 @@ version: 0.0.{build}
 image: Visual Studio 2017
 
 install:
-- dotnet restore
+- dotnet restore /src/Blog.Core.sln
 
 dotnet_csproj:
   patch: true
