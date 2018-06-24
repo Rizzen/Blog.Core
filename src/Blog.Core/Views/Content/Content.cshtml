@@ -1,0 +1,26 @@
+﻿@inject Microsoft.Extensions.Options.IOptionsMonitor<SiteSettings> SiteSettings;
+@model Blog.Core.Models.Interfaces.IPageContext
+@{
+    Layout = "_Layout";
+}
+
+<html>
+<head>
+</head>
+
+<body>
+<div class="container">
+    <h2>Content</h2>
+    <ul>
+        @{
+            foreach (var blogPost in Model.Blog.Posts)
+            {
+                <a asp-controller="Home" asp-action="SinglePostPage" asp-route-postName="@blogPost.Filename">
+                    <li>@blogPost.Title</li>
+                </a>
+            }
+        }
+    </ul>
+</div>
+</body>
+</html>

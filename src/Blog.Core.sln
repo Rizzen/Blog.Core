@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Core", "Blog.Core\Blog.Core.csproj", "{3F8F4F30-3AD4-46E7-9311-A6AA950D6376}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Core.Tests", "Blog.Core.Tests\Blog.Core.Tests.csproj", "{2F822B2B-8EB4-4B0C-BD93-8B536D2BF37E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorLight", "RazorLight\RazorLight.csproj", "{9BEF2CE8-FE22-4939-ACDB-943232C65BCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F8F4F30-3AD4-46E7-9311-A6AA950D6376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F8F4F30-3AD4-46E7-9311-A6AA950D6376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F8F4F30-3AD4-46E7-9311-A6AA950D6376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F8F4F30-3AD4-46E7-9311-A6AA950D6376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F822B2B-8EB4-4B0C-BD93-8B536D2BF37E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F822B2B-8EB4-4B0C-BD93-8B536D2BF37E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F822B2B-8EB4-4B0C-BD93-8B536D2BF37E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F822B2B-8EB4-4B0C-BD93-8B536D2BF37E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BEF2CE8-FE22-4939-ACDB-943232C65BCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BEF2CE8-FE22-4939-ACDB-943232C65BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BEF2CE8-FE22-4939-ACDB-943232C65BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BEF2CE8-FE22-4939-ACDB-943232C65BCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
