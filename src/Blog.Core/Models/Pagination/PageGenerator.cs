@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Blog.Core.Domain.Entities;
+using Blog.Core.Domain.Settings;
 using Blog.Core.Models.Contexts;
 using Blog.Core.Models.Interfaces;
-using Blog.Core.Models.Settings;
 using Blog.Core.Models.Templating.Interfaces;
 using Microsoft.Extensions.Options;
 

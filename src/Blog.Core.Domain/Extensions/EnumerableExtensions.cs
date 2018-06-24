@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Blog.Core.Extensions
+namespace Blog.Core.Domain.Extensions
 {
     public static class EnumerableExtensions
     {

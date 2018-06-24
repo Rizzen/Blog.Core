@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using YamlDotNet.RepresentationModel;
 
-namespace Blog.Core.Extensions
+namespace Blog.Core.Domain.Extensions
 {
     public static class YamlExtensions
     {

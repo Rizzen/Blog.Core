@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Blog.Core.Domain.Entities;
+using Blog.Core.Domain.Settings;
 using Blog.Core.Models.Interfaces;
-using Blog.Core.Models.Settings;
 using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Models.Templating.Processing;
 using Microsoft.Extensions.Options;
@@ -17,8 +18,8 @@ namespace Blog.Core.Models.Contexts
         public List<Post> Posts => _facade.GetAllPostsMetadataOnly();
        
         public List<Tag> Tags => Posts.SelectMany(x => x.Tags)
-                                         .Distinct()
-                                         .ToList();
+                                      .Distinct()
+                                      .ToList();
         
         public BlogContext(IPostFacade facade, IOptions<SiteSettings> siteSetting)
         {

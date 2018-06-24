@@ -14,9 +14,11 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.1" />
     <PackageReference Include="System.IO" Version="4.3.0" />
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
-    <PackageReference Include="YamlDotNet" Version="4.2.3" />
+    <PackageReference Include="YamlDotNet" Version="5.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Blog.Core.DAL\Blog.Core.DAL.csproj" />
+    <ProjectReference Include="..\Blog.Core.Domain\Blog.Core.Domain.csproj" />
     <ProjectReference Include="..\RazorLight\RazorLight.csproj" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Blog.Core.Models.Settings
+﻿namespace Blog.Core.Domain.Settings
 {
     public class SiteSettings
     {

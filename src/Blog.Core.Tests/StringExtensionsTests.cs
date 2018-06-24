@@ -1,4 +1,4 @@
-﻿using Blog.Core.Extensions;
+﻿using Blog.Core.Domain.Extensions;
 using NUnit.Framework;
 
 namespace Blog.Core.Tests

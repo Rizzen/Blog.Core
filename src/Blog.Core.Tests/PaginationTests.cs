@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Blog.Core.Domain.Entities;
 using Blog.Core.Models;
 using Blog.Core.Models.Contexts;
 using Blog.Core.Models.Interfaces;

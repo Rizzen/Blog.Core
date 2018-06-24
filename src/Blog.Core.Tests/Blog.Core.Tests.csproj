@@ -7,6 +7,7 @@
     <Prefer32bit>false</Prefer32bit>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Blog.Core.Domain\Blog.Core.Domain.csproj" />
     <ProjectReference Include="..\Blog.Core\Blog.Core.csproj" />
   </ItemGroup>
   <ItemGroup>

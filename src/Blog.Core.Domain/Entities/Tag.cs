@@ -1,6 +1,6 @@
-﻿using Blog.Core.Extensions;
+﻿using Blog.Core.Domain.Extensions;
 
-namespace Blog.Core.Models.Templating.Processing
+namespace Blog.Core.Domain.Entities
 {
     public class Tag
     {

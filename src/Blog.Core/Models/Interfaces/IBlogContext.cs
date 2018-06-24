@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Blog.Core.Domain.Entities;
 using Blog.Core.Models.Templating.Processing;
 
 namespace Blog.Core.Models.Interfaces

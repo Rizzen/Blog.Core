@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Blog.Core.DAL.Posts;
+using Blog.Core.Domain.Entities;
 using Blog.Core.Models;
-using Blog.Core.Models.DAL;
 using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Models.Templating.Processing;
 using Blog.Core.Utils;

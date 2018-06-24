@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Blog.Core.Domain.Entities;
 using Blog.Core.Models.Interfaces;
 
 namespace Blog.Core.Models

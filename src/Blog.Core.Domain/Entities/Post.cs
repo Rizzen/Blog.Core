@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Blog.Core.Models.Templating.Processing;
 
-namespace Blog.Core.Models
+namespace Blog.Core.Domain.Entities
 {
     /// <summary>Represents the Blog Post</summary>
     public class Post

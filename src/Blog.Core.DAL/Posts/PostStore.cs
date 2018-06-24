@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Blog.Core.Models.Settings;
+using Blog.Core.Domain.Entities;
+using Blog.Core.Domain.Settings;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 
-namespace Blog.Core.Models.DAL
+namespace Blog.Core.DAL.Posts
 {
     public class PostStore: IPostStore
     {

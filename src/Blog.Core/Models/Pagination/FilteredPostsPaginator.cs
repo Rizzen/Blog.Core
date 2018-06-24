@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Blog.Core.Extensions;
+using Blog.Core.Domain.Entities;
 using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Templating.Interfaces;
 
