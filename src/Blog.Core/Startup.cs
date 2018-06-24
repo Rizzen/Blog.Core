@@ -36,7 +36,7 @@ namespace Blog.Core
             
             services.Configure<SiteSettings>(Configuration.GetSection("SiteSettings"));
             
-            services.AddTransient<RazorEngine>();
+            services.AddSingleton<RazorEngine>();
             services.AddTransient<InitialStateCreator>();
             
             services.AddScoped<IPostStore, PostStore>();
