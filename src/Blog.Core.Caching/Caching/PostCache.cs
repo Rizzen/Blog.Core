@@ -1,38 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Blog.Core.DAL.Posts;
 using Blog.Core.Domain.Entities;
-using Blog.Core.Models.Templating.Interfaces;
 
-namespace Blog.Core.Utils.Caching
+namespace Blog.Core.Caching.Caching
 {
-    public class PostCache
+    public class PostCache : IPostCache
     {
         private readonly ICache<Post> _cache;
-        private readonly IPostStore _postStore;
-        private readonly IPostsProcessor _postsProcessor;
         
         public List<Post> Posts => _cache.Get();
 
-        public PostCache(ICache<Post> cache, IPostStore postStore, IPostsProcessor postsProcessor)
+        public PostCache(ICache<Post> cache)
         {
             _cache = cache;
-            _postStore = postStore;
-            _postsProcessor = postsProcessor;
             
-            CheckAndUpdate();
         }
 
-        public async void CheckAndUpdate()
+        public void StoreOrUpdate(IEnumerable<Post> currentPosts)
         {
-            var currentPosts = _postStore.Posts;
             var cached = _cache.Get();
-            
-            var delta = CalculateDelta(cached, currentPosts);
+            var delta = CalculateDelta(cached, currentPosts.ToList());
             _cache.Remove(delta.Item1);
-            
-            var toadd = await _postsProcessor.ProcessMetadata(delta.Item2);
-            _cache.Store(toadd);
+            _cache.Store(delta.Item2);
         }
 
         private (List<Post>, List<Post>) CalculateDelta(IReadOnlyCollection<Post> cachedPosts,

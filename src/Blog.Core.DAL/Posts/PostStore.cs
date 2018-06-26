@@ -15,6 +15,7 @@ namespace Blog.Core.DAL.Posts
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly SiteSettings _siteSettings;
         
+        //после разделения не бует нужно, скорее всего
         public List<Post> Posts => GetAllPostsWithNames();
 
         private string Path => $"{_hostingEnvironment.ContentRootPath}{_siteSettings.PostsFolderPath}/";
@@ -45,7 +46,8 @@ namespace Blog.Core.DAL.Posts
         private List<Post> GetAllPostsWithNames()
         {
             return Directory.GetFiles(Path, "*.cshtml", SearchOption.AllDirectories)
-                            .Select(p => p.Replace(Path, string.Empty).Replace(".cshtml", string.Empty))
+                            .Select(p => p.Replace(Path, string.Empty)
+                                          .Replace(".cshtml", string.Empty))
                             .Select(p => new Post {Filename = p})
                             .ToList();
         }

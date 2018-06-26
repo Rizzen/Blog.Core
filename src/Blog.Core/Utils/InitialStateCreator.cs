@@ -1,4 +1,5 @@
 ﻿using Blog.Core.Models.Templating.Processing;
+using Blog.Core.Utils.Caching;
 
 namespace Blog.Core.Utils
 {

@@ -7,6 +7,7 @@ using Blog.Core.Models;
 using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Models.Templating.Processing;
 using Blog.Core.Utils;
+using Blog.Core.Utils.Caching;
 using Moq;
 using NUnit.Framework;
 

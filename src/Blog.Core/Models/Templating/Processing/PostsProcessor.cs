@@ -7,7 +7,7 @@ using Blog.Core.Domain.Entities;
 using Blog.Core.Domain.Extensions;
 using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Templating.Interfaces;
-using Blog.Core.Models.Templating.Razor;
+using Blog.Core.Razor.Razor;
 
 namespace Blog.Core.Models.Templating.Processing
 {

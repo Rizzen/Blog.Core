@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Blog.Core.DAL\Blog.Core.DAL.csproj" />
     <ProjectReference Include="..\Blog.Core.Domain\Blog.Core.Domain.csproj" />
+    <ProjectReference Include="..\Blog.Core.Razor\Blog.Core.Razor.csproj" />
     <ProjectReference Include="..\RazorLight\RazorLight.csproj" />
   </ItemGroup>
 </Project>

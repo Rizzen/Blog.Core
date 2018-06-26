@@ -7,6 +7,7 @@ using Blog.Core.Domain.Extensions;
 using Blog.Core.Models.Interfaces;
 using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Models.Templating.Processing;
+using Blog.Core.Utils.Caching;
 
 namespace Blog.Core.Models.Templating
 {

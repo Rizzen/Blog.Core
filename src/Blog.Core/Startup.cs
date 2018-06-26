@@ -14,8 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Blog.Core.Models.Templating;
 using Blog.Core.Models.Templating.Interfaces;
 using Blog.Core.Models.Templating.Processing;
-using Blog.Core.Models.Templating.Razor;
+using Blog.Core.Razor.Razor;
 using Blog.Core.Utils;
+using Blog.Core.Utils.Caching;
 
 namespace Blog.Core
 {
