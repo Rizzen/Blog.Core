@@ -15,7 +15,7 @@ namespace Blog.Core.DAL.Posts
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly SiteSettings _siteSettings;
         
-        //после разделения не бует нужно, скорее всего
+        // после разделения не бует нужно, скорее всего
         public List<Post> Posts => GetAllPostsWithNames();
 
         private string Path => $"{_hostingEnvironment.ContentRootPath}{_siteSettings.PostsFolderPath}/";

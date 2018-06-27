@@ -1,6 +1,6 @@
-﻿@model Blog.Core.Models.Interfaces.IPageContext 
+﻿@model Blog.Core.Models.Services.BlogModel 
 
-@foreach (var post in Model.Paginator.Posts)
+@foreach (var post in Model.Page.Posts)
 {
     <span class="blog-post-meta">
         <a asp-controller="Home" asp-action="SinglePostPage" asp-route-postName="@post.Filename">
@@ -26,7 +26,7 @@
     </div>
 }
 
-<div paginator="@Model.Paginator" page-action="Index"
+<div model="@Model.Page" page-action="Index"
      page-class="page-item" page-class-normal="page-item"
      page-class-selected="page-item active" page-link-class="page-link"
      page-list-class="pagination" class="pagination"></div>

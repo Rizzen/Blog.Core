@@ -5,11 +5,11 @@ title: Индекс
 date: "2018-04-09"
 ---
 
-@model Blog.Core.Models.Interfaces.IPageContext
+@model Blog.Core.Models.Services.BlogModel
 <p>
     Its easy to use @@Model in posts!
     @{
-        foreach (var post in Model.Blog.Posts)
+        foreach (var post in Model.Posts)
         {
             <li>@post.Title</li>
         }

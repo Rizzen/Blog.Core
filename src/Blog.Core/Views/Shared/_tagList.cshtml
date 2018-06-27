@@ -1,8 +1,8 @@
-﻿@model Blog.Core.Models.Interfaces.IPageContext 
+﻿@model Blog.Core.Models.Services.BlogModel 
 
 <h3>Tag List</h3> 
 <ul>
-    @foreach (var tag in Model.Blog.Tags)
+    @foreach (var tag in Model.Tags)
     {
         <li>@tag</li>
     }

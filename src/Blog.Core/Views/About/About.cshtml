@@ -1,6 +1,5 @@
 ﻿@inject Microsoft.Extensions.Options.IOptionsMonitor<SiteSettings> SiteSettings;
 @using Blog.Core.Domain.Settings
-@model Blog.Core.Models.Contexts.BlogContext
 @{
     ViewData["Title"] = $"About {SiteSettings.CurrentValue.Author}";
     ViewData["Description"] = SiteSettings.CurrentValue.Description;
