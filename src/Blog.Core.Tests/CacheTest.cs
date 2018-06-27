@@ -9,6 +9,7 @@ using Blog.Core.Models.Templating.Processing;
 using Blog.Core.Utils;
 using Blog.Core.Utils.Caching;
 using Moq;
+using Newtonsoft.Json.Bson;
 using NUnit.Framework;
 
 namespace Blog.Core.Tests

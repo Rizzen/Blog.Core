@@ -16,12 +16,18 @@ namespace Blog.Core.Caching.Caching
             
         }
 
-        public void StoreOrUpdate(IEnumerable<Post> currentPosts)
+        public void Store(IEnumerable<Post> currentPosts)
+        {
+            var cached = _cache.Get();
+            var delta = CalculateDelta(cached, currentPosts.ToList());
+            _cache.Store(delta.Item2);
+        }
+
+        public void Remove(IEnumerable<Post> currentPosts)
         {
             var cached = _cache.Get();
             var delta = CalculateDelta(cached, currentPosts.ToList());
             _cache.Remove(delta.Item1);
-            _cache.Store(delta.Item2);
         }
 
         private (List<Post>, List<Post>) CalculateDelta(IReadOnlyCollection<Post> cachedPosts,

@@ -6,6 +6,7 @@ namespace Blog.Core.Caching.Caching
     public interface IPostCache
     {
         List<Post> Posts { get; }
-        void StoreOrUpdate(IEnumerable<Post> currentPosts);
+        void Store(IEnumerable<Post> currentPosts);
+        void Remove(IEnumerable<Post> currentPosts);
     }
 }

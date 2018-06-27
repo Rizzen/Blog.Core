@@ -9,11 +9,15 @@ namespace Blog.Core.Caching.Caching
     public class ConcurrentCache<T>: ICache<T>
     {
         private readonly ConcurrentDictionary<T, byte> _bag;
+
+        public ConcurrentCache()
+        {
+            _bag = new ConcurrentDictionary<T, byte>();
+        }
         
         public ConcurrentCache(IEnumerable<T> initial)
         {
             _bag = new ConcurrentDictionary<T, byte>();
-            Console.WriteLine("Created");
             if (initial != null)
             {
                 foreach (var init in initial)
