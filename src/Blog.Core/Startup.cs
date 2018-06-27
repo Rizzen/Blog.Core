@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Blog.Core.Razor.Razor;
+using Blog.Core.Utils;
 
 namespace Blog.Core
 {
@@ -34,6 +35,8 @@ namespace Blog.Core
             
             services.AddSingleton<RazorEngine>();
             
+            services.AddTransient<InitialStateCreator>();
+            
             services.AddScoped<IPostStore, PostStore>();
             services.AddScoped<IPostCache, PostCache>();
             services.AddScoped<IMetadataProcessor, MetadataProcessor>();
@@ -47,6 +50,9 @@ namespace Blog.Core
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            
+            var initor = serviceProvider.GetService<InitialStateCreator>();
+            initor.Init();
             
             app.UseMvc(routes => {
                 routes.MapRoute(name: "single", 
