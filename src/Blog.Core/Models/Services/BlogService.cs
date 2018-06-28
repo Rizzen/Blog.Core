@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Blog.Core.Caching.Caching;
 using Blog.Core.DAL.Posts;
 using Blog.Core.Domain.Entities;
+using Blog.Core.Domain.Extensions;
 using Blog.Core.Domain.Settings;
 using Blog.Core.Razor.Razor;
 using Microsoft.Extensions.Options;
@@ -25,9 +26,7 @@ namespace Blog.Core.Models.Services
             _siteSettings = siteSettings.Value;
         }
 
-        /// <summary>
-        /// Получает посты из кеша, рендерит нужные, отдает страницу
-        /// </summary>
+        /// <summary>Получает посты из кеша, рендерит нужные, отдает страницу</summary>
         /// <param name="pageNum"></param>
         /// <returns></returns>
         public async Task<BlogModel> CreateModel(int pageNum)
@@ -36,22 +35,27 @@ namespace Blog.Core.Models.Services
                                     .Skip((pageNum - 1) * _siteSettings.PostsPerPage)
                                     .Take(_siteSettings.PostsPerPage)
                                     .ToList();
-            var pageCount = (_cache.Posts.Count / _siteSettings.PostsPerPage) + 1;
-            var postsWithContent = await FillPostsWithContent(posts);
+            var pageCount = (_cache.Posts.Count / _siteSettings.PostsPerPage);
+            
+            var metaModel = new BlogModel {Posts = _cache.Posts, Page = new Page(posts, pageNum), PageCount = pageCount};
+            
+            var postsWithContent = await FillPostsWithContent(posts, metaModel);
+            
             var page = new Page(postsWithContent, pageNum);
             
-            var model = new BlogModel {Posts = _store.Posts, Page = page};
+            var model = new BlogModel {Posts = _cache.Posts, Page = page, PageCount = pageCount};
 
             return model;
         }
 
-        private async Task<List<Post>> FillPostsWithContent(IEnumerable<Post> posts)
+        private async Task<List<Post>> FillPostsWithContent(IEnumerable<Post> posts, BlogModel model)
         {
-            return (await Task.WhenAll(posts.Select(FillPostWithContent))).ToList();
+            return (await Task.WhenAll(posts.Select(x=> FillPostWithContent(x, model)))).ToList();
             
-            async Task<Post> FillPostWithContent(Post post)
+            async Task<Post> FillPostWithContent(Post post, BlogModel metaModel)
             {
-                post.Content = await _store.GetContentByFilename(post.Filename);
+                var content = (await _store.GetContentByFilename(post.Filename)).ExcludeHeader();
+                post.Content = await _engine.ProcessTemplateAsync(post.Filename, content, model);
                 return post;
             }
         }

@@ -15,9 +15,6 @@ namespace Blog.Core.DAL.Posts
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly SiteSettings _siteSettings;
         
-        // после разделения не бует нужно, скорее всего
-        public List<Post> Posts => GetAllPostsWithNames();
-
         private string Path => $"{_hostingEnvironment.ContentRootPath}{_siteSettings.PostsFolderPath}/";
         
         public PostStore(IHostingEnvironment hostingEnvironment, IOptions<SiteSettings> siteSettings)
@@ -43,7 +40,7 @@ namespace Blog.Core.DAL.Posts
             return result;
         }
         
-        private List<Post> GetAllPostsWithNames()
+        public List<Post> GetAllPostsWithNames()
         {
             return Directory.GetFiles(Path, "*.cshtml", SearchOption.AllDirectories)
                             .Select(p => p.Replace(Path, string.Empty)

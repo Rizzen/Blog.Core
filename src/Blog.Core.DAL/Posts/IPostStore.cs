@@ -6,7 +6,7 @@ namespace Blog.Core.DAL.Posts
 {
     public interface IPostStore
     {
-        List<Post> Posts { get; }
+        List<Post> GetAllPostsWithNames();
         Task<string> GetContentByFilename(string name);
     }
 }

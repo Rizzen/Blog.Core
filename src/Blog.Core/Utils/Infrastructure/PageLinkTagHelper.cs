@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Blog.Core.Utils.Infrastructure
 {
-    [HtmlTargetElement("div", Attributes = "paginator")]
+    [HtmlTargetElement("div", Attributes = "model")]
     public class PageLinkTagHelper: TagHelper
     {
         private readonly IUrlHelperFactory _urlHelperFactory;

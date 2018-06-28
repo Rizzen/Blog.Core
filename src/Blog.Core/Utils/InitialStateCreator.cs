@@ -20,7 +20,7 @@ namespace Blog.Core.Utils
         // BAD
         public async void Init()
         {
-            var posts = _store.Posts;
+            var posts = _store.GetAllPostsWithNames();
             var postsWithMeta =  await _metadata.GetMetadataForPosts(posts);
             _cache.Store(postsWithMeta);
         }
