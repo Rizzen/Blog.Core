@@ -1,19 +1,16 @@
 ﻿using System;
 using System.IO;
-using Blog.Core.Models;
-using Blog.Core.Models.Contexts;
-using Blog.Core.Models.DAL;
-using Blog.Core.Models.Interfaces;
-using Blog.Core.Models.Pagination;
+using Blog.Core.Caching.Caching;
+using Blog.Core.DAL.Posts;
+using Blog.Core.Domain.Entities;
+using Blog.Core.Domain.Settings;
+using Blog.Core.Metadata;
+using Blog.Core.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Blog.Core.Models.Settings;
-using Blog.Core.Models.Templating;
-using Blog.Core.Models.Templating.Interfaces;
-using Blog.Core.Models.Templating.Processing;
-using Blog.Core.Models.Templating.Razor;
+using Blog.Core.Razor.Razor;
 using Blog.Core.Utils;
 
 namespace Blog.Core
@@ -37,16 +34,14 @@ namespace Blog.Core
             services.Configure<SiteSettings>(Configuration.GetSection("SiteSettings"));
             
             services.AddSingleton<RazorEngine>();
+            
             services.AddTransient<InitialStateCreator>();
             
             services.AddScoped<IPostStore, PostStore>();
-            services.AddScoped<IPostsProcessor, PostsProcessor>();
-            services.AddScoped<IPageGenerator, PageGenerator>();
-            services.AddScoped<IBlogContext, BlogContext>();
-            services.AddScoped<IPostFacade, PostFacade>();
-            services.AddScoped<IBlog, BlogMain>();
-            services.AddScoped<PostCache>();
-
+            services.AddScoped<IPostCache, PostCache>();
+            services.AddScoped<IMetadataProcessor, MetadataProcessor>();
+            services.AddScoped<IBlogService, BlogService>();
+            
             services.AddSingleton<ICache<Post>, ConcurrentCache<Post>>();
         }
         
@@ -55,7 +50,7 @@ namespace Blog.Core
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-
+            
             var initor = serviceProvider.GetService<InitialStateCreator>();
             initor.Init();
             

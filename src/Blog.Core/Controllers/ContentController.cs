@@ -1,20 +1,21 @@
-﻿using Blog.Core.Models.Interfaces;
+﻿using System.Threading.Tasks;
+using Blog.Core.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Core.Controllers
 {
     public class ContentController : Controller
     {
-        private readonly IBlog _blog;
+        private readonly IBlogService _blog;
 
-        public ContentController(IBlog blog)
+        public ContentController(IBlogService blog)
         {
             _blog = blog;
         }
 
-        public ViewResult Content()
+        public async Task<ViewResult> Content()
         {
-            return View(_blog.GetBlogContent());
+            return View(await _blog.CreateModel(0));
         } 
     }
 }

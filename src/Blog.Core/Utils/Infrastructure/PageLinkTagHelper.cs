@@ -1,4 +1,4 @@
-﻿using Blog.Core.Models.Interfaces;
+﻿using Blog.Core.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Blog.Core.Utils.Infrastructure
 {
-    [HtmlTargetElement("div", Attributes = "paginator")]
+    [HtmlTargetElement("div", Attributes = "model")]
     public class PageLinkTagHelper: TagHelper
     {
         private readonly IUrlHelperFactory _urlHelperFactory;
@@ -16,7 +16,7 @@ namespace Blog.Core.Utils.Infrastructure
         [HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
         
-        public IPaginator Paginator { get; set; }
+        public BlogModel Model { get; set; }
         
         public string PageAction { get; set; }
         
@@ -42,7 +42,7 @@ namespace Blog.Core.Utils.Infrastructure
             var list = new TagBuilder("ul");
             list.AddCssClass(PageListClass);
 
-            for (var i = 1; i <= Paginator.PageCount; i++)
+            for (var i = 1; i <= Model.PageCount; i++)
             {
                 var tag = new TagBuilder("li");
                 tag.AddCssClass(PageClass);
@@ -51,7 +51,7 @@ namespace Blog.Core.Utils.Infrastructure
                 a.Attributes["href"] = urlHelper.Action(PageAction, new {page = i});
                 a.AddCssClass(PageLinkClass);
                 
-                tag.AddCssClass(i == Paginator.PageNumber
+                tag.AddCssClass(i == Model.Page.PageNum
                                          ? PageClassSelected
                                          : PageClassNormal);
                 

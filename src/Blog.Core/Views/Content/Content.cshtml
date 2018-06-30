@@ -1,5 +1,6 @@
 ﻿@inject Microsoft.Extensions.Options.IOptionsMonitor<SiteSettings> SiteSettings;
-@model Blog.Core.Models.Interfaces.IPageContext
+@using Blog.Core.Domain.Settings
+@model Blog.Core.Models.Services.BlogModel
 @{
     Layout = "_Layout";
 }
@@ -13,7 +14,7 @@
     <h2>Content</h2>
     <ul>
         @{
-            foreach (var blogPost in Model.Blog.Posts)
+            foreach (var blogPost in Model.Posts)
             {
                 <a asp-controller="Home" asp-action="SinglePostPage" asp-route-postName="@blogPost.Filename">
                     <li>@blogPost.Title</li>
