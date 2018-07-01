@@ -6,6 +6,14 @@ install:
 - cd src
 - dotnet restore
 
+test:
+  assemblies:
+    only:
+      - Blog.Core.Tests.dll'
+
+test_script:
+  - dotnet test Blog.Core.Tests\Blog.Core.Tests.csproj --logger:Appveyor
+
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'

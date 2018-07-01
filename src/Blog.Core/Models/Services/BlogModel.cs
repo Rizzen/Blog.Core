@@ -4,7 +4,7 @@ using Blog.Core.Domain.Entities;
 
 namespace Blog.Core.Models.Services
 {
-    public class BlogModel
+    public class BlogModel : IBlogModel
     {
         public List<Post> Posts { get; set; }
         

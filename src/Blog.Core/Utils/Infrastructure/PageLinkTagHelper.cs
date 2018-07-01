@@ -16,7 +16,7 @@ namespace Blog.Core.Utils.Infrastructure
         [HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
         
-        public BlogModel Model { get; set; }
+        public IBlogModel Model { get; set; }
         
         public string PageAction { get; set; }
         

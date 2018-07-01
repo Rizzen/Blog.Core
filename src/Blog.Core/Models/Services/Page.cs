@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Blog.Core.Domain.Entities;
 
 namespace Blog.Core.Models.Services
@@ -9,9 +10,9 @@ namespace Blog.Core.Models.Services
         public List<Post> Posts { get; }
         public int PageNum { get; }
 
-        public Page(List<Post> posts, int pageNum)
+        public Page(IEnumerable<Post> posts, int pageNum)
         {
-            Posts = posts;
+            Posts = posts.ToList();
             PageNum = pageNum;
         }
     }

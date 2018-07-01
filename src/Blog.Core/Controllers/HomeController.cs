@@ -26,24 +26,20 @@ namespace Blog.Core.Controllers
         [HttpGet]
         public async Task<ViewResult> SinglePostPage(string postName)
         {
-            // TODO
-            return View("Index", await _blog.CreateModel(0));
-            //return await FilteredPostPage(x => x.Where(p => p.Filename == postName));
+            return await FilteredPostPage(x => x.Where(p => p.Filename.Equals(postName)));
         }
         
         [HttpGet]
         public async Task<ViewResult> PostsWithTagPage(string tag)
         {
-            // TODO
             return await FilteredPostPage(x => x.Where(p => p.Tags.Any(t => t.ResolutionName == tag)));
         }
         
         private async Task<ViewResult> FilteredPostPage(Func<IEnumerable<Post>, IEnumerable<Post>> filter)
         {
-            // TODO
             if (filter == null)
                 throw new ArgumentNullException(nameof(filter));
-            return View("Index", await _blog.CreateModel(0));
+            return View("Index", await _blog.GetFilteredPostsModel(filter));
         }
     }
 }
