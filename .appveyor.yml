@@ -11,6 +11,9 @@ test:
     only:
       - Blog.Core.Tests.dll'
 
+test_script:
+  - dotnet test Blog.Core.Tests\Blog.Core.Tests.csproj
+
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
