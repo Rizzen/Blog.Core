@@ -6,6 +6,11 @@ install:
 - cd src
 - dotnet restore
 
+test:
+  assemblies:
+    only:
+      - '**\*.Tests.dll'
+
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
