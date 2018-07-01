@@ -9,7 +9,7 @@ install:
 test:
   assemblies:
     only:
-      - '**\*.Tests.dll'
+      - Blog.Core.Tests.dll'
 
 dotnet_csproj:
   patch: true
