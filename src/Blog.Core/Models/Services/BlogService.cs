@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Blog.Core.Caching.Caching;
@@ -17,6 +18,8 @@ namespace Blog.Core.Models.Services
         private readonly IPostStore _store;
         private readonly RazorEngine _engine;
         private readonly SiteSettings _siteSettings;
+        
+        private int PageCount => _cache.Posts.Count / _siteSettings.PostsPerPage;
 
         public BlogService(IPostCache cache, IPostStore store, RazorEngine engine, IOptions<SiteSettings> siteSettings)
         {
@@ -26,36 +29,42 @@ namespace Blog.Core.Models.Services
             _siteSettings = siteSettings.Value;
         }
 
-        /// <summary>Получает посты из кеша, рендерит нужные, отдает страницу</summary>
-        /// <param name="pageNum"></param>
-        /// <returns></returns>
-        public async Task<BlogModel> CreateModel(int pageNum)
+        public async Task<IBlogModel> CreateModel(int pageNum)
         {
             var posts = _cache.Posts.OrderByDescending(x => x.DateTime)
                                     .Skip((pageNum - 1) * _siteSettings.PostsPerPage)
                                     .Take(_siteSettings.PostsPerPage)
                                     .ToList();
-            var pageCount = (_cache.Posts.Count / _siteSettings.PostsPerPage);
             
-            var metaModel = new BlogModel {Posts = _cache.Posts, Page = new Page(posts, pageNum), PageCount = pageCount};
+            var metaModel = new BlogModel {Posts = _cache.Posts, Page = new Page(posts, pageNum), PageCount = PageCount};
             
             var postsWithContent = await FillPostsWithContent(posts, metaModel);
             
             var page = new Page(postsWithContent, pageNum);
             
-            var model = new BlogModel {Posts = _cache.Posts, Page = page, PageCount = pageCount};
-
-            return model;
+            return new BlogModel {Posts = _cache.Posts, Page = page, PageCount = PageCount};
+        }
+ 
+        public async Task<IBlogModel> GetFilteredPostsModel(Func<IEnumerable<Post>, IEnumerable<Post>> filter)
+        {
+            var posts = filter(_cache.Posts).ToList();
+            var metaModel = new BlogModel {Posts = _cache.Posts, Page = new Page(posts, 0), PageCount = PageCount};
+            
+            var postsWithContent = await FillPostsWithContent(posts, metaModel);
+            
+            var page = new Page(postsWithContent, 0);
+            
+            return new BlogModel {Posts = _cache.Posts, Page = page, PageCount = PageCount};
         }
 
         private async Task<List<Post>> FillPostsWithContent(IEnumerable<Post> posts, BlogModel model)
         {
-            return (await Task.WhenAll(posts.Select(x=> FillPostWithContent(x, model)))).ToList();
+            return (await Task.WhenAll(posts.Select(x => FillPostWithContent(x, model)))).ToList();
             
             async Task<Post> FillPostWithContent(Post post, BlogModel metaModel)
             {
                 var content = (await _store.GetContentByFilename(post.Filename)).ExcludeHeader();
-                post.Content = await _engine.ProcessTemplateAsync(post.Filename, content, model);
+                post.Content = await _engine.ProcessTemplateAsync(post.Filename, content, metaModel);
                 return post;
             }
         }
