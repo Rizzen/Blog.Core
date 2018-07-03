@@ -33,15 +33,14 @@ namespace Blog.Core
             
             services.Configure<SiteSettings>(Configuration.GetSection("SiteSettings"));
             
-            services.AddSingleton<RazorEngine>();
-            
             services.AddTransient<InitialStateCreator>();
             
             services.AddScoped<IPostStore, PostStore>();
-            services.AddScoped<IPostCache, PostCache>();
             services.AddScoped<IMetadataProcessor, MetadataProcessor>();
             services.AddScoped<IBlogService, BlogService>();
+            services.AddScoped<IPostCache, PostCache>();
             
+            services.AddSingleton<RazorEngine>();
             services.AddSingleton<ICache<Post>, ConcurrentCache<Post>>();
         }
         
