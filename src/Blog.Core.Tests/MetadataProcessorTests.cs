@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Blog.Core.Caching.Caching;
 using Blog.Core.DAL.Posts;
 using Blog.Core.Domain.Entities;
 using Blog.Core.Metadata;

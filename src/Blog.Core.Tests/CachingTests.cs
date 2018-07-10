@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Blog.Core.Caching.Caching;
 using Blog.Core.Domain.Entities;
 using NUnit.Framework;
