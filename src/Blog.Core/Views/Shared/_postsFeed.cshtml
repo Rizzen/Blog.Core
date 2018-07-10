@@ -1,4 +1,4 @@
-﻿@model Blog.Core.Models.Services.IBlogModel 
+﻿@model IBlogModel 
 
 @foreach (var post in Model.Page.Posts)
 {
@@ -26,7 +26,7 @@
     </div>
 }
 
-<div model="@Model" page-action="Index"
+<div paginator model="@Model" page-action="Index"
      page-class="page-item" page-class-normal="page-item"
      page-class-selected="page-item active" page-link-class="page-link"
      page-list-class="pagination" class="pagination"></div>

@@ -14,7 +14,6 @@ namespace Blog.Core
 
         private static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseUrls("http://0.0.0.0:5000")
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
