@@ -37,8 +37,6 @@ namespace Blog.Core.Utils.Infrastructure
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            if (Model.PageCount < 2) return;
-            
             var urlHelper = _urlHelperFactory.GetUrlHelper(ViewContext);
             var result = new TagBuilder("nav");
             var list = new TagBuilder("ul");
