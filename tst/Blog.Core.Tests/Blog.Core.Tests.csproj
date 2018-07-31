@@ -7,10 +7,10 @@
     <Prefer32bit>false</Prefer32bit>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Blog.Core.Caching\Blog.Core.Caching.csproj" />
-    <ProjectReference Include="..\Blog.Core.Domain\Blog.Core.Domain.csproj" />
-    <ProjectReference Include="..\Blog.Core.Metadata\Blog.Core.Metadata.csproj" />
-    <ProjectReference Include="..\Blog.Core\Blog.Core.csproj" />
+    <ProjectReference Include="..\..\src\Blog.Core.Caching\Blog.Core.Caching.csproj" />
+    <ProjectReference Include="..\..\src\Blog.Core.Domain\Blog.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Blog.Core.Metadata\Blog.Core.Metadata.csproj" />
+    <ProjectReference Include="..\..\src\Blog.Core\Blog.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
