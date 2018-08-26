@@ -8,9 +8,9 @@ My simple ASP.NET Core blog engine.
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
 ## Build status
-![Build status](https://ci.appveyor.com/api/projects/status/gfhe41llpm74wgg8/branch/master?svg=true)
+[![Build status](https://ci.appveyor.com/api/projects/status/gfhe41llpm74wgg8/branch/master?svg=true)](https://ci.appveyor.com/project/Rizzen/blog-core)
 
-![AppVeyor build](https://img.shields.io/appveyor/tests/Rizzen/blog-core.svg)
+[![AppVeyor build](https://img.shields.io/appveyor/tests/Rizzen/blog-core.svg)](https://ci.appveyor.com/project/Rizzen/blog-core/build/tests)
 ## Example
 Almost actual version deployed here - <a href="http://kilooscartango.azurewebsites.net/">Blog</a>
 

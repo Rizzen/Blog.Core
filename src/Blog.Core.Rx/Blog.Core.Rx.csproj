@@ -2,4 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="ObservableFileSystem" />
+  </ItemGroup>
 </Project>
