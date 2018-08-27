@@ -19,6 +19,10 @@ Almost actual version deployed here - <a href="http://kilooscartango.azurewebsit
 - <a href="https://github.com/aaubry/YamlDotNet">YamlDotNet</a> library 
 - <a href="https://github.com/toddams/RazorLight">RazorLight</a> template engine
 
+
+### Supported by JetBrains
+<img src="src\Blog.Core\wwwroot\img\jetbrains.svg" href="https://www.jetbrains.com/?from=Blog.Core">
+
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier
 [cc-by-license]: http://creativecommons.org/licenses/by-sa/3.0/
 [source]: http://scientific-alliance.wikidot.com/item-classes
