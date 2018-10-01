@@ -1,4 +1,5 @@
 ﻿using Blog.Core.Domain.Extensions;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Blog.Core.Tests
@@ -12,13 +13,13 @@ namespace Blog.Core.Tests
             // Arrange
             const string testString = "I <3 c# и платформу .NET";
             const string expected = "i3cиплатформу._n_e_t";
-            
+
             // Act
             var result = testString.ToUnderscoreCase()
                                    .RemoveSpecialCharacters();
-            
+
             // Assert
-            Assert.AreEqual(result, expected);
+            result.Should().Be(expected);
         }
     }
 }

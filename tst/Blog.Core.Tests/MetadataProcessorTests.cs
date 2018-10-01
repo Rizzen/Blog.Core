@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Blog.Core.DAL.Posts;
 using Blog.Core.Domain.Entities;
 using Blog.Core.Metadata;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 
@@ -27,13 +28,13 @@ title: SimpleTitle
 
             var metadataProcessor = new MetadataProcessor(store.Object);
             var post = new Post {Filename = "MyPost"};
-            
+
             // Act
             var postWithMeta = (await metadataProcessor.GetMetadataForPosts(new [] {post})).First();
-            
+
             // Assert
-            Assert.AreEqual(postWithMeta.Tags.Count, 2);
-            Assert.AreEqual(postWithMeta.Title, "SimpleTitle");
+            postWithMeta.Tags.Count.Should().Be(2);
+            postWithMeta.Title.Should().Be("SimpleTitle");
         }
     }
 }
