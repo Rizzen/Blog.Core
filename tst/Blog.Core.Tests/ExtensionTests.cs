@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Blog.Core.Domain.Extensions;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Blog.Core.Tests
@@ -15,11 +16,12 @@ namespace Blog.Core.Tests
                                                 .ToArray();
             // Act
             array.ForEach(x => x.Value++);
-            
+
             // Assert
             var checkArray = Enumerable.Range(1, 100).Select(x => new IntWrapper(x))
                                                      .ToArray();
-            Assert.AreEqual(array, checkArray);
+
+            array.Should().BeEquivalentTo(checkArray);
         }
 
         private class IntWrapper

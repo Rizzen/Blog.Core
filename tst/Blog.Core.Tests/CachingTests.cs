@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Blog.Core.Caching.Caching;
 using Blog.Core.Domain.Entities;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Blog.Core.Tests
@@ -14,14 +15,14 @@ namespace Blog.Core.Tests
             // Arrange
             var cache = new PostCache(new ConcurrentCache<Post>());
             var post = new Post {Filename = "MyPost"};
-            
+
             // Act
             cache.Store(new List<Post> {post});
-            
+
             // Assert
-            Assert.AreEqual(1, cache.Posts.Count);
+            cache.Posts.Count.Should().Be(1);
         }
-        
+
         [Test]
         public void CacheTest_StoreTwoPostsIntoEmptyCache()
         {
@@ -32,14 +33,14 @@ namespace Blog.Core.Tests
                 new Post {Filename = "MyPost"},
                 new Post {Filename = "MySecondPost"}
             };
-            
+
             // Act
             cache.Store(posts);
-            
+
             // Assert
-            Assert.AreEqual(2, cache.Posts.Count);
+            cache.Posts.Count.Should().Be(2);
         }
-        
+
         [Test]
         public void CacheTest_StoreOnePostIntoNotEmptyCache()
         {
@@ -52,12 +53,12 @@ namespace Blog.Core.Tests
             };
             var cache = new PostCache(new ConcurrentCache<Post>(storedPosts));
             var post = new Post {Filename = "MyAwesomePost"};
-            
+
             // Act
             cache.Store(new List<Post> {post});
-            
+
             // Assert
-            Assert.AreEqual(4, cache.Posts.Count);
+            cache.Posts.Count.Should().Be(4);
         }
 
         [Test]
@@ -76,14 +77,14 @@ namespace Blog.Core.Tests
                 new Post {Filename = "MyAwesomePost"},
                 new Post {Filename = "MySecondAwesomePost"}
             };
-            
+
             // Act
             cache.Store(posts);
-            
+
             // Assert
-            Assert.AreEqual(5, cache.Posts.Count);
+            cache.Posts.Count.Should().Be(5);
         }
-        
+
         [Test]
         public void CacheTest_StoreOnePostWithCollisionsInCache()
         {
@@ -99,14 +100,14 @@ namespace Blog.Core.Tests
             {
                 new Post {Filename = "MyPost"}
             };
-            
+
             // Act
             cache.Store(posts);
-            
+
             // Assert
-            Assert.AreEqual(3, cache.Posts.Count);
+            cache.Posts.Count.Should().Be(3);
         }
-        
+
         [Test]
         public void CacheTest_StoreTwoPostsWithCollisionsInCache()
         {
@@ -123,14 +124,14 @@ namespace Blog.Core.Tests
                 new Post {Filename = "MyPost"},
                 new Post {Filename = "MySecondPost"},
             };
-            
+
             // Act
             cache.Store(posts);
-            
+
             // Assert
-            Assert.AreEqual(3, cache.Posts.Count);
+            cache.Posts.Count.Should().Be(3);
         }
-        
+
         [Test]
         public void CacheTest_StoreThreePostsWithCollisionsInCache()
         {
@@ -147,12 +148,12 @@ namespace Blog.Core.Tests
                 new Post {Filename = "MyPost"},
                 new Post {Filename = "AwesomePost"},
             };
-            
+
             // Act
             cache.Store(posts);
-            
+
             // Assert
-            Assert.AreEqual(4, cache.Posts.Count);
+            cache.Posts.Count.Should().Be(4);
         }
     }
 }
