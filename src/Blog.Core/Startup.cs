@@ -50,8 +50,7 @@ namespace Blog.Core
             app.UseStatusCodePages();
             app.UseStaticFiles();
             
-            var initor = serviceProvider.GetService<InitialStateCreator>();
-            initor.Init();
+            serviceProvider.GetService<InitialStateCreator>();
             
             app.UseMvc(routes => {
                 routes.MapRoute(name: "single", 
