@@ -44,7 +44,6 @@ namespace Blog.Core.DAL.Posts
         {
             return Directory.GetFiles(Path, "*.cshtml", SearchOption.AllDirectories)
                             .Select(p => p.Replace(Path, string.Empty)
-                                          //.Insert(0, "_posts/")
                                           .Replace(".cshtml", string.Empty)
                             )
                             .Select(p => new Post {Filename = p})

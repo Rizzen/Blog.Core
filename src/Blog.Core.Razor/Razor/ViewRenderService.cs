@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -17,7 +18,7 @@ namespace Blog.Core.Razor.Razor
         private readonly IRazorViewEngine _razorViewEngine;
         private readonly ITempDataProvider _tempDataProvider;
         private readonly IServiceProvider _serviceProvider;
- 
+        
         public ViewRenderService(
             IRazorViewEngine razorViewEngine,
             ITempDataProvider tempDataProvider,
