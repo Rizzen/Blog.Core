@@ -65,10 +65,10 @@ namespace Blog.Core.Models.Services
             
             async Task<Post> FillPostWithContent(Post post, BlogModel metaModel)
             {
-                var content = (await _store.GetContentByFilename(post.Filename)).ExcludeHeader();
+                var viewName = $"_posts/{post.Filename}";
                 var result = new Post(post)
                 {
-                    Content = await _engine.ProcessTemplateAsync(post.Filename, content, metaModel)
+                    Content = await _engine.ProcessTemplateByFilenameAsync(viewName, metaModel)
                 };
                 return result;
             }

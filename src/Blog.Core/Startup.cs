@@ -28,7 +28,7 @@ namespace Blog.Core
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddOptions();
             
             services.Configure<SiteSettings>(Configuration.GetSection("SiteSettings"));
@@ -39,8 +39,9 @@ namespace Blog.Core
             services.AddScoped<IMetadataProcessor, MetadataProcessor>();
             services.AddScoped<IBlogService, BlogService>();
             services.AddScoped<IPostCache, PostCache>();
+            services.AddTransient<ViewRenderService>();
             
-            services.AddSingleton<RazorEngine>();
+            services.AddTransient<RazorEngine>();
             services.AddSingleton<ICache<Post>, ConcurrentCache<Post>>();
         }
         
@@ -56,21 +57,16 @@ namespace Blog.Core
                 routes.MapRoute(name: "single", 
                                 template: "Posts/{postName}",
                                 defaults: new {Controller = "Home", action="SinglePostPage"});
-                
                 routes.MapRoute(name: "pagination",
                                 template: "Home/Page/{page}",
                                 defaults: new {Controller = "Home", action = "Index"});
-                
                 routes.MapRoute(name: "tags",
                                 template: "Posts/tag/{tag}",
                                 defaults: new {Controller = "Home", action = "PostsWithTagPage"});
-                
                 routes.MapRoute(name: "default", 
                                 template: "{controller=Home}/{action=Index}");
-                
                 routes.MapRoute(name: "about",
                                 template: "{controller=About}/{action=Index}");
-                
                 routes.MapRoute(name: "content",
                                 template: "{controller=Content}/{action=Content}");
             });

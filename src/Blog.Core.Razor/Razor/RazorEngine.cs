@@ -1,22 +1,17 @@
 ﻿using System.Threading.Tasks;
-using RazorLight;
 
 namespace Blog.Core.Razor.Razor
 {
     public class RazorEngine
     {
-        private readonly RazorLightEngine _engine;
+        private readonly ViewRenderService _viewRenderService;
         
-        public RazorEngine()
+        public RazorEngine(ViewRenderService viewRenderService)
         {
-            _engine = new RazorLightEngineBuilder()
-                          .UseMemoryCachingProvider()
-                          .Build();
+            _viewRenderService = viewRenderService;
         }
 
-        public async Task<string> ProcessTemplateAsync(string name, string template, object model)
-        {
-            return await _engine.CompileRenderStringAsync(name, template, model);
-        }
+        public async Task<string> ProcessTemplateByFilenameAsync(string filename, object model) 
+            => await _viewRenderService.RenderToStringAsync(filename, model);
     }
 }

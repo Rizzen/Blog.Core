@@ -13,9 +13,7 @@ namespace Blog.Core.Controllers
             _blog = blog;
         }
 
-        public async Task<ViewResult> Content()
-        {
-            return View(await _blog.CreateModel(0));
-        } 
+        public async Task<ViewResult> Content() 
+            => View(await _blog.CreateModel(0));
     }
 }

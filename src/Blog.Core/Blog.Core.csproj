@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <AssemblyName>blog.core</AssemblyName>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
@@ -11,11 +12,10 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.5" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
     <PackageReference Include="System.IO" Version="4.3.0" />
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
-    <PackageReference Include="YamlDotNet" Version="5.2.1" />
+    <PackageReference Include="YamlDotNet" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blog.Core.Caching\Blog.Core.Caching.csproj" />
@@ -23,6 +23,5 @@
     <ProjectReference Include="..\Blog.Core.Domain\Blog.Core.Domain.csproj" />
     <ProjectReference Include="..\Blog.Core.Metadata\Blog.Core.Metadata.csproj" />
     <ProjectReference Include="..\Blog.Core.Razor\Blog.Core.Razor.csproj" />
-    <ProjectReference Include="..\RazorLight\RazorLight.csproj" />
   </ItemGroup>
 </Project>

@@ -20,7 +20,6 @@ namespace Blog.Core.Utils
             Initialization = InitializeAsync();
         }
 
-
         public Task Initialization { get;  }
 
         private async Task InitializeAsync()

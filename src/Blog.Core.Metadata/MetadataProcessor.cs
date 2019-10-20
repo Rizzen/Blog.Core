@@ -26,8 +26,8 @@ namespace Blog.Core.Metadata
         {
             var header = (await _store.GetContentByFilename(input.Filename)).YamlHeader();
             
-            if (header.TryGetValue("tags", out var tags))
-                input.Tags = ProcessTags(tags as List<string>);
+            if (header.TryGetValue("tags", out var tags) && tags is List<string> list)
+                input.Tags = ProcessTags(list);
             
             if(header.TryGetValue("title", out var title))
                 input.Title = title as string;
